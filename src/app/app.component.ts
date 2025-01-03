@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import {MenuComponent} from './shared/menu/menu.component';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';  // Import các module của ng-zorro
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 @Component({
   selector: 'app-root',
-  imports: [MenuComponent, RouterModule, NzLayoutModule, NzMenuModule],
+  imports: [RouterLink, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'agriculture-fe';
+  isCollapsed = false;
 }
