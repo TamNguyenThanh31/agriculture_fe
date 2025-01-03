@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { NzLayoutModule } from 'ng-zorro-antd/layout'; // Import module của ng-zorro
-import { NzMenuModule } from 'ng-zorro-antd/menu';  // Import module menu của ng-zorro
-import { RouterModule } from '@angular/router'; // Để sử dụng routerLink
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
-  standalone: true,  // Đảm bảo đây là standalone component
-  imports: [NzLayoutModule, NzMenuModule, RouterModule], // Import các module cần thiết
+  standalone: true,
+  imports: [NzMenuModule, NzLayoutModule, RouterModule],
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'] // Đảm bảo sử dụng 'styleUrls' thay vì 'styleUrl'
+  styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {}
