@@ -36,21 +36,55 @@
     </div>
 
     <!-- Hiển thị dự báo thời tiết -->
+<!--    <div class="forecast-info">-->
+<!--      <nz-list nzBordered nzHeader="Forecast for 5 Days">-->
+<!--        <nz-list-item *ngFor="let forecast of filteredForecast">-->
+<!--          <div>-->
+<!--            <strong>{{ forecast.dt * 1000 | date: 'EEEE, MMM d, y' }}</strong>-->
+<!--          </div>-->
+<!--          <div>-->
+<!--            Temperature: {{ forecast.main.temp | number: '1.1-1' }} °C-->
+<!--          </div>-->
+<!--          <div>-->
+<!--            Humidity: {{ forecast.main.humidity }} %-->
+<!--          </div>-->
+<!--          <div>-->
+<!--            Condition: {{ forecast.weather[0].description }}-->
+<!--          </div>-->
+<!--        </nz-list-item>-->
+<!--      </nz-list>-->
+<!--    </div>-->
     <div class="forecast-info">
-      <nz-list nzBordered nzHeader="Forecast for 5 Days">
-        <nz-list-item *ngFor="let forecast of forecastData">
-          <div>
-            <strong>{{ forecast.dt * 1000 | date: 'EEEE, MMM d, y, h:mm a' }}</strong>
+      <div class="forecast-cards">
+        <nz-card
+          *ngFor="let forecast of filteredForecast"
+          [nzBordered]="true"
+          [nzHoverable]="true"
+          class="forecast-card"
+        >
+          <div class="card-header">
+            <strong>{{ forecast.dt * 1000 | date: 'EEEE, MMM d, y' }}</strong>
           </div>
-          <div>
-            Temperature: {{ forecast.main.temp | number: '1.1-1' }} °C
+          <div class="card-body">
+            <!-- Sử dụng ngSrc để tải hình ảnh -->
+            <img
+              [ngSrc]="getWeatherIcon(forecast.weather[0].icon)"
+              alt="{{ forecast.weather[0].description }}"
+              width="80"
+              height="80"
+              class="weather-icon"
+            />
+            <div class="weather-details">
+              <p>Temperature: {{ forecast.main.temp | number: '1.1-1' }} °C</p>
+              <p>Humidity: {{ forecast.main.humidity }} %</p>
+              <p>Condition: {{ forecast.weather[0].description }}</p>
+            </div>
           </div>
-          <div>
-            Condition: {{ forecast.weather[0].description }}
-          </div>
-        </nz-list-item>
-      </nz-list>
+        </nz-card>
+      </div>
     </div>
+
+
   </ng-container>
 
   <!-- Loading state -->

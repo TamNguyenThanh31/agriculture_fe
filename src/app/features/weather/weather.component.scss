@@ -17,3 +17,41 @@ button {
 .forecast-info {
   margin-top: 20px;
 }
+
+
+//
+.forecast-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.forecast-card {
+  width: 300px;
+  text-align: center;
+}
+
+.card-header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.weather-icon {
+  display: block;
+  margin: 0 auto;
+  width: 80px;
+  height: 80px;
+}
+
+.weather-details {
+  text-align: left;
+  width: 100%;
+}
