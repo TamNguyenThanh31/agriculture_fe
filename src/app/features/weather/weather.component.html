@@ -1,1 +1,64 @@
-<p>weather works!</p>
+<nz-card nzTitle="Weather Information" nzBordered>
+  <!-- Input tìm kiếm thành phố -->
+  <div class="search-container">
+    <nz-input-group nzPrefixIcon="search">
+      <input
+        nz-input
+        placeholder="Enter city name"
+        [(ngModel)]="city"
+      />
+    </nz-input-group>
+    <button nz-button nzType="primary" (click)="fetchWeatherAndForecast()" [disabled]="!city">
+      Search
+    </button>
+  </div>
+
+  <!-- Hiển thị thời tiết hiện tại -->
+  <ng-container *ngIf="weatherData; else loading">
+    <div class="weather-info">
+      <nz-descriptions nzTitle="Current Weather" nzBordered>
+        <nz-descriptions-item nzTitle="Temperature (°C)">
+          {{ weatherData.main.temp | number: '1.1-1' }}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Humidity (%)">
+          {{ weatherData.main.humidity }}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Condition">
+          {{ weatherData.weather[0].main }}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Description">
+          {{ weatherData.weather[0].description }}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Wind Speed (m/s)">
+          {{ weatherData.wind.speed }}
+        </nz-descriptions-item>
+      </nz-descriptions>
+    </div>
+
+    <!-- Hiển thị dự báo thời tiết -->
+    <div class="forecast-info">
+      <nz-list nzBordered nzHeader="Forecast for 5 Days">
+        <nz-list-item *ngFor="let forecast of forecastData">
+          <div>
+            <strong>{{ forecast.dt * 1000 | date: 'EEEE, MMM d, y, h:mm a' }}</strong>
+          </div>
+          <div>
+            Temperature: {{ forecast.main.temp | number: '1.1-1' }} °C
+          </div>
+          <div>
+            Condition: {{ forecast.weather[0].description }}
+          </div>
+        </nz-list-item>
+      </nz-list>
+    </div>
+  </ng-container>
+
+  <!-- Loading state -->
+  <ng-template #loading>
+    <div class="loading-container">
+      <nz-spin nzSize="large"></nz-spin>
+      <p>Loading weather data...</p>
+    </div>
+  </ng-template>
+</nz-card>
+
