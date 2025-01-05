@@ -4,10 +4,9 @@ import {NzCardComponent} from 'ng-zorro-antd/card';
 import {NzInputDirective, NzInputGroupComponent} from 'ng-zorro-antd/input';
 import {FormsModule} from '@angular/forms';
 import {NzDescriptionsComponent, NzDescriptionsItemComponent} from 'ng-zorro-antd/descriptions';
-import {DatePipe, DecimalPipe, NgForOf, NgIf} from '@angular/common';
+import {DatePipe, DecimalPipe, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {NzSpinComponent} from 'ng-zorro-antd/spin';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {NzListComponent, NzListItemComponent} from 'ng-zorro-antd/list';
 
 @Component({
   selector: 'app-weather',
@@ -24,10 +23,9 @@ import {NzListComponent, NzListItemComponent} from 'ng-zorro-antd/list';
     NzSpinComponent,
     NgIf,
     NzButtonComponent,
-    NzListComponent,
-    NzListItemComponent,
     DatePipe,
-    NgForOf
+    NgForOf,
+    NgOptimizedImage
   ]
 })
 export class WeatherComponent implements OnInit {
@@ -35,6 +33,7 @@ export class WeatherComponent implements OnInit {
   city: string = ''; // Thành phố mặc định
   weatherData: any = null;
   forecastData: any[] = [];
+  filteredForecast: any[] = []; // Dữ liệu đã lọc, mỗi ngày chỉ 1 bản ghi
   isLoading: boolean = false;
 
   constructor(private agricultureService: AgricultureService) {}
@@ -73,6 +72,7 @@ export class WeatherComponent implements OnInit {
         (data) => {
           this.weatherData = data.currentWeather;
           this.forecastData = data.forecast.list;
+          this.filteredForecast = this.filterForecastByDay(this.forecastData); // Lọc dữ liệu
           this.isLoading = false; // Tắt trạng thái loading
         },
         (error) => {
@@ -83,5 +83,26 @@ export class WeatherComponent implements OnInit {
       );
     }
   }
+
+  // Lọc dự báo thời tiết để chỉ lấy 1 bản ghi đại diện cho mỗi ngày
+  filterForecastByDay(forecast: any[]): any[] {
+    const filtered = [];
+    const seenDates = new Set();
+
+    for (const item of forecast) {
+      const date = new Date(item.dt * 1000).toDateString(); // Chuyển timestamp thành ngày
+      if (!seenDates.has(date)) {
+        filtered.push(item); // Thêm bản ghi đầu tiên của ngày vào danh sách
+        seenDates.add(date); // Đánh dấu ngày này đã được xử lý
+      }
+    }
+
+    return filtered;
+  }
+
+  getWeatherIcon(iconCode: string): string {
+    return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+  }
+
 
 }
