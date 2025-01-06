@@ -1,0 +1,27 @@
+.crop-season-table {
+  th {
+    text-align: center;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+
+  td {
+    text-align: center;
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    button {
+      i {
+        font-size: 16px;
+        color: #1890ff;
+        &:hover {
+          color: #40a9ff;
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,153 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {NzModalModule, NzModalService} from 'ng-zorro-antd/modal';
+import {AgricultureService, CropSeason} from '../../shared/service/agriculture.service';
+import {NzCardComponent} from 'ng-zorro-antd/card';
+import {NzButtonComponent} from 'ng-zorro-antd/button';
+import {NzTableComponent, NzThMeasureDirective} from 'ng-zorro-antd/table';
+import {DatePipe, NgForOf} from '@angular/common';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzTooltipDirective} from 'ng-zorro-antd/tooltip';
+import {NzIconDirective} from 'ng-zorro-antd/icon';
+import {CropFormComponent} from './crop-form/crop-form.component';
 
 @Component({
   selector: 'app-season',
-  imports: [],
+  standalone: true,
+  imports: [
+    NzCardComponent,
+    NzButtonComponent,
+    NzTableComponent,
+    NzThMeasureDirective,
+    NgForOf,
+    DatePipe,
+    NzModalModule,
+    NzTooltipDirective,
+    NzIconDirective
+  ],
   templateUrl: './season.component.html',
-  styleUrl: './season.component.scss'
+  styleUrls: ['./season.component.scss']
 })
-export class SeasonComponent {
+export class SeasonComponent implements OnInit {
+  cropSeasons: CropSeason[] = [];
+  isLoading = false;
 
+  constructor(
+    private agricultureService: AgricultureService,
+    private modal: NzModalService,
+    private message: NzMessageService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadCropSeasons();
+  }
+
+  loadCropSeasons(): void {
+    this.isLoading = true;
+    this.agricultureService.getAllCropSeasons().subscribe(
+      (data) => {
+        this.cropSeasons = data;
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Error fetching crop seasons:', error);
+        this.message.error('Failed to load crop seasons.');
+        this.isLoading = false;
+      }
+    );
+  }
+
+  // deleteSeason(seasonId: number): void {
+  //   this.modal.confirm({
+  //     nzTitle: 'Are you sure you want to delete this season?',
+  //     nzOnOk: () => {
+  //       this.agricultureService.deleteCropSeason(seasonId).subscribe(
+  //         () => {
+  //           this.cropSeasons = this.cropSeasons.filter((s) => s.id !== seasonId);
+  //           this.message.success('Season deleted successfully.');
+  //         },
+  //         (error) => {
+  //           console.error('Error deleting season:', error);
+  //           this.message.error('Failed to delete season.');
+  //         }
+  //       );
+  //     },
+  //   });
+  // }
+
+  createSeason(): void {
+    const modal = this.modal.create({
+      nzTitle: 'Add New Season',
+      nzContent: CropFormComponent,
+      nzFooter: null,
+    });
+
+    const instance = modal.getContentComponent();
+    if (instance) {
+      instance.isEditMode = false;
+
+      instance.onSave.subscribe((newSeason: CropSeason) => {
+        this.agricultureService.createCropSeason(newSeason).subscribe((createdSeason) => {
+          this.cropSeasons.push(createdSeason);
+          this.message.success('New season created successfully.');
+          modal.close();
+        });
+      });
+
+      instance.onCancel.subscribe(() => {
+        modal.close();
+      });
+    }
+  }
+
+  editSeason(season: CropSeason): void {
+    const modal = this.modal.create({
+      nzTitle: `Edit Season: ${season.seasonName}`,
+      nzContent: CropFormComponent,
+      nzFooter: null,
+    });
+
+    const instance = modal.getContentComponent();
+    if (instance) {
+      instance.isEditMode = true;
+      instance.season = { ...season }; // Truyền đầy đủ thông tin, bao gồm id
+
+      instance.onSave.subscribe((updatedSeason: CropSeason) => {
+        if (updatedSeason.id) {
+          this.agricultureService.updateCropSeason(updatedSeason.id, updatedSeason).subscribe((result) => {
+            const index = this.cropSeasons.findIndex((s) => s.id === result.id);
+            if (index !== -1) {
+              this.cropSeasons[index] = result;
+            }
+            this.message.success('Season updated successfully.');
+            modal.close();
+          });
+        } else {
+          this.message.error('Failed to update season. Missing ID.');
+        }
+      });
+
+      instance.onCancel.subscribe(() => {
+        modal.close();
+      });
+    }
+  }
+
+
+  viewTasks(seasonId: number): void {
+    console.log(`Viewing tasks for season ID: ${seasonId}`);
+    // Chuyển hướng đến màn hình danh sách công việc
+  }
+
+  deleteSeason(id: number): void {
+    this.agricultureService.deleteCropSeason(id).subscribe(() => {
+      this.cropSeasons = this.cropSeasons.filter((season) => season.id !== id);
+      this.message.success('Season deleted successfully.');
+    });
+  }
+
+  manageTasks(seasonId: number): void {
+    console.log(`Managing tasks for season ID: ${seasonId}`);
+    // Chuyển hướng hoặc hiển thị modal quản lý công việc
+  }
 }
