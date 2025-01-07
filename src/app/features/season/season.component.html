@@ -1,11 +1,71 @@
-<nz-card nzTitle="Crop Seasons Management" nzBordered [nzExtra]="addButtonTemplate">
+<!--<nz-card nzTitle="Crop Seasons Management" nzBordered [nzExtra]="addButtonTemplate">-->
+<!--  <nz-table-->
+<!--    [nzBordered]="true"-->
+<!--    [nzData]="cropSeasons"-->
+<!--    [nzLoading]="isLoading"-->
+<!--    [nzSize]="'middle'"-->
+<!--    [nzShowPagination]="false"-->
+<!--    class="crop-season-table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th nzWidth="25%">Season Name</th>-->
+<!--      <th nzWidth="15%">Crop Type</th>-->
+<!--      <th nzWidth="10%">Area (ha)</th>-->
+<!--      <th nzWidth="20%">Planting Date</th>-->
+<!--      <th nzWidth="20%">Harvest Date</th>-->
+<!--      <th nzWidth="20%">Status</th>-->
+<!--      <th nzWidth="10%">Actions</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr *ngFor="let season of cropSeasons">-->
+<!--      <td>{{ season.seasonName }}</td>-->
+<!--      <td>{{ season.cropType }}</td>-->
+<!--      <td>{{ season.area }}</td>-->
+<!--      <td>{{ season.plantingDate | date: 'mediumDate' }}</td>-->
+<!--      <td>{{ season.expectedHarvestDate | date: 'mediumDate' }}</td>-->
+<!--      <td>{{ season.status }}</td>-->
+<!--      <td class="action-buttons">-->
+<!--&lt;!&ndash;        <button nz-button nzType="link" nzShape="circle" nz-tooltip="View Tasks" (click)="viewTasks(season.id)">&ndash;&gt;-->
+<!--&lt;!&ndash;          <i nz-icon nzType="eye"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;        </button>&ndash;&gt;-->
+<!--        <button nz-button nzType="link" nzShape="circle" nz-tooltip="Edit Season" (click)="editSeason(season)">-->
+<!--          <i nz-icon nzType="edit"></i>-->
+<!--        </button>-->
+<!--        <button nz-button nzType="link" nzShape="circle" nz-tooltip="Delete Season" (click)="deleteSeason(season.id)">-->
+<!--          <i nz-icon nzType="delete"></i>-->
+<!--        </button>-->
+<!--        <button nz-button nzType="link" nzShape="circle" nz-tooltip="Manage Tasks" (click)="manageTasks(season.id)">-->
+<!--          <i nz-icon nzType="bars"></i>-->
+<!--        </button>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </nz-table>-->
+<!--</nz-card>-->
+
+<!--&lt;!&ndash; Nút thêm mới &ndash;&gt;-->
+<!--<ng-template #addButtonTemplate>-->
+<!--  <button nz-button nzType="primary" (click)="createSeason()">-->
+<!--    <i nz-icon nzType="plus"></i> Add New Season-->
+<!--  </button>-->
+<!--</ng-template>-->
+
+
+<nz-card
+  nzTitle="Crop Seasons Management"
+  nzBordered
+  [nzExtra]="addButtonTemplate"
+  class="modern-card"
+>
   <nz-table
     [nzBordered]="true"
     [nzData]="cropSeasons"
     [nzLoading]="isLoading"
     [nzSize]="'middle'"
     [nzShowPagination]="false"
-    class="crop-season-table">
+    class="crop-season-table"
+  >
     <thead>
     <tr>
       <th nzWidth="25%">Season Name</th>
@@ -24,18 +84,38 @@
       <td>{{ season.area }}</td>
       <td>{{ season.plantingDate | date: 'mediumDate' }}</td>
       <td>{{ season.expectedHarvestDate | date: 'mediumDate' }}</td>
-      <td>{{ season.status }}</td>
+      <td>
+        <nz-tag
+          [nzColor]="season.status === 'Active' ? 'green' : 'red'"
+        >{{ season.status }}</nz-tag
+        >
+      </td>
       <td class="action-buttons">
-<!--        <button nz-button nzType="link" nzShape="circle" nz-tooltip="View Tasks" (click)="viewTasks(season.id)">-->
-<!--          <i nz-icon nzType="eye"></i>-->
-<!--        </button>-->
-        <button nz-button nzType="link" nzShape="circle" nz-tooltip="Edit Season" (click)="editSeason(season)">
+        <button
+          nz-button
+          nzType="link"
+          nzShape="circle"
+          nz-tooltip="Edit Season"
+          (click)="editSeason(season)"
+        >
           <i nz-icon nzType="edit"></i>
         </button>
-        <button nz-button nzType="link" nzShape="circle" nz-tooltip="Delete Season" (click)="deleteSeason(season.id)">
+        <button
+          nz-button
+          nzType="link"
+          nzShape="circle"
+          nz-tooltip="Delete Season"
+          (click)="deleteSeason(season.id)"
+        >
           <i nz-icon nzType="delete"></i>
         </button>
-        <button nz-button nzType="link" nzShape="circle" nz-tooltip="Manage Tasks" (click)="manageTasks(season.id)">
+        <button
+          nz-button
+          nzType="link"
+          nzShape="circle"
+          nz-tooltip="Manage Tasks"
+          (click)="manageTasks(season.id)"
+        >
           <i nz-icon nzType="bars"></i>
         </button>
       </td>
@@ -46,7 +126,7 @@
 
 <!-- Nút thêm mới -->
 <ng-template #addButtonTemplate>
-  <button nz-button nzType="primary" (click)="createSeason()">
+  <button nz-button nzType="primary" class="add-button" (click)="createSeason()">
     <i nz-icon nzType="plus"></i> Add New Season
   </button>
 </ng-template>

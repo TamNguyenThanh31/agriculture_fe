@@ -3,7 +3,6 @@ import { AgricultureService, WeatherResponse } from '../../shared/service/agricu
 import {NzCardComponent} from 'ng-zorro-antd/card';
 import {NzInputDirective, NzInputGroupComponent} from 'ng-zorro-antd/input';
 import {FormsModule} from '@angular/forms';
-import {NzDescriptionsComponent, NzDescriptionsItemComponent} from 'ng-zorro-antd/descriptions';
 import {DatePipe, DecimalPipe, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {NzSpinComponent} from 'ng-zorro-antd/spin';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
@@ -17,8 +16,6 @@ import {NzButtonComponent} from 'ng-zorro-antd/button';
     NzInputDirective,
     NzInputGroupComponent,
     FormsModule,
-    NzDescriptionsComponent,
-    NzDescriptionsItemComponent,
     DecimalPipe,
     NzSpinComponent,
     NgIf,
@@ -39,46 +36,51 @@ export class WeatherComponent implements OnInit {
   constructor(private agricultureService: AgricultureService) {}
 
   ngOnInit(): void {
-    // this.fetchWeather();
-    this.fetchWeatherAndForecast();
-  }
+    // Khôi phục giá trị từ localStorage
+    const savedCity = localStorage.getItem('weather_city');
+    const savedWeatherData = localStorage.getItem('weather_data');
+    const savedForecastData = localStorage.getItem('forecast_data');
+    const savedFilteredForecast = localStorage.getItem('filtered_forecast');
 
-  // fetchWeather(): void {
-  //   if (!this.city.trim()) {
-  //     alert('Please enter a valid city name');
-  //     return;
-  //   }
-  //
-  //   this.agricultureService.getWeather(this.city).subscribe({
-  //     next: (data) => {
-  //       console.log('Weather data received:', data); // Kiểm tra dữ liệu trả về
-  //       this.weatherData = data; // Gán dữ liệu vào biến weatherData
-  //     },
-  //     error: (err) => {
-  //       console.error('Error fetching weather data:', err);
-  //       if (err.status === 404) {
-  //         alert(`City "${this.city}" not found.`);
-  //       } else {
-  //         alert('Could not fetch weather data. Please try again.');
-  //       }
-  //     },
-  //   });
-  // }
+    if (savedCity) {
+      this.city = savedCity;
+
+      if (savedWeatherData && savedForecastData && savedFilteredForecast) {
+        // Nếu dữ liệu tồn tại trong localStorage, khôi phục dữ liệu
+        this.weatherData = JSON.parse(savedWeatherData);
+        this.forecastData = JSON.parse(savedForecastData);
+        this.filteredForecast = JSON.parse(savedFilteredForecast);
+      } else {
+        // Nếu không có dữ liệu, tải lại
+        this.fetchWeatherAndForecast();
+      }
+    }
+  }
 
   fetchWeatherAndForecast() {
     if (this.city) {
-      this.isLoading = true; // Hiển thị trạng thái loading
+      this.isLoading = true;
+
+      // Lưu giá trị thành phố vào localStorage
+      localStorage.setItem('weather_city', this.city);
+
       this.agricultureService.getWeatherAndForecast(this.city).subscribe(
         (data) => {
           this.weatherData = data.currentWeather;
           this.forecastData = data.forecast.list;
-          this.filteredForecast = this.filterForecastByDay(this.forecastData); // Lọc dữ liệu
-          this.isLoading = false; // Tắt trạng thái loading
+          this.filteredForecast = this.filterForecastByDay(this.forecastData);
+
+          // Lưu dữ liệu vào localStorage
+          localStorage.setItem('weather_data', JSON.stringify(this.weatherData));
+          localStorage.setItem('forecast_data', JSON.stringify(this.forecastData));
+          localStorage.setItem('filtered_forecast', JSON.stringify(this.filteredForecast));
+
+          this.isLoading = false;
         },
         (error) => {
           console.error('Error fetching weather data:', error);
           alert('Could not fetch weather data. Please try again.');
-          this.isLoading = false; // Tắt trạng thái loading khi lỗi
+          this.isLoading = false;
         }
       );
     }
@@ -103,6 +105,4 @@ export class WeatherComponent implements OnInit {
   getWeatherIcon(iconCode: string): string {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
   }
-
-
 }

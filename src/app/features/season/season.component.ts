@@ -10,6 +10,7 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzTooltipDirective} from 'ng-zorro-antd/tooltip';
 import {NzIconDirective} from 'ng-zorro-antd/icon';
 import {CropFormComponent} from './crop-form/crop-form.component';
+import {NzTagComponent} from 'ng-zorro-antd/tag';
 
 @Component({
   selector: 'app-season',
@@ -23,7 +24,8 @@ import {CropFormComponent} from './crop-form/crop-form.component';
     DatePipe,
     NzModalModule,
     NzTooltipDirective,
-    NzIconDirective
+    NzIconDirective,
+    NzTagComponent
   ],
   templateUrl: './season.component.html',
   styleUrls: ['./season.component.scss']
