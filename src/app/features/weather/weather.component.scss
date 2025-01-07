@@ -1,57 +1,181 @@
 
+/* Container chính */
 .search-container {
   display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem; /* Thêm khoảng cách dưới */
+}
+
+/* Hộp tìm kiếm */
+.search-box {
+  display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px; /* Giới hạn chiều rộng */
 }
 
-button {
-  height: 40px;
+/* Input */
+nz-input-group {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.weather-info {
-  margin-bottom: 20px;
+nz-input-group input {
+  background: transparent;
+  border: none;
+  color: #333; /* Màu chữ */
+  font-size: 1rem;
+  padding: 0.8rem;
+  border-radius: 12px;
+  outline: none;
 }
+
+nz-input-group input::placeholder {
+  color: #aaa; /* Màu placeholder */
+  font-style: italic;
+}
+
+/* Nút Search */
+.search-button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #1890ff, #1d39c4);
+  color: #fff;
+}
+
+.search-button:hover {
+  background: linear-gradient(135deg, #40a9ff, #597ef7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-button:disabled {
+  background: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+
+
+////
+//.weather-info {
+//  margin-bottom: 20px;
+//}
 
 .forecast-info {
   margin-top: 20px;
 }
 
 
-//
-.forecast-cards {
+// hien thi du bao thoi tiet 5 ngay
+/* Container chính */
+.forecast-info {
+  overflow-x: auto;
+  padding: 1rem 0;
+  background: #f9f9f9; /* Nền sáng */
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  white-space: nowrap;
+  gap: 1rem;
 }
 
+/* Cards layout */
+.forecast-cards {
+  display: flex;
+  flex-wrap: nowrap; /* Chỉ cuộn ngang */
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+/* Card thiết kế */
 .forecast-card {
-  width: 300px;
+  flex: 0 0 auto; /* Kích thước cố định */
+  width: 200px; /* Card nhỏ gọn */
+  background: #ffffff; /* Màu nền */
+  border-radius: 16px; /* Bo góc mềm mại */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bóng mờ hiện đại */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng hover */
+  overflow: hidden; /* Đảm bảo nội dung không bị tràn */
+}
+
+.forecast-card:hover {
+  transform: translateY(-5px); /* Hiệu ứng nổi khi hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Bóng mờ lớn hơn */
+}
+
+/* Card nội dung */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
   text-align: center;
 }
 
-.card-header {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
+/* Header */
+.card-header .date {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
 }
 
+/* Body */
 .card-body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0.5rem 0;
 }
 
 .weather-icon {
-  display: block;
-  margin: 0 auto;
-  width: 80px;
-  height: 80px;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1)); /* Làm mềm biểu tượng */
 }
 
-.weather-details {
-  text-align: left;
-  width: 100%;
+.weather-details .temp {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #1890ff; /* Nhấn mạnh nhiệt độ */
 }
+
+.weather-details .desc {
+  font-size: 0.9rem;
+  color: #666; /* Màu sắc nhẹ nhàng */
+}
+
+/* Footer */
+.card-footer {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.5rem;
+}
+
+/* Thanh cuộn */
+.forecast-info::-webkit-scrollbar {
+  height: 8px;
+}
+
+.forecast-info::-webkit-scrollbar-thumb {
+  background: #1890ff; /* Màu thanh cuộn */
+  border-radius: 4px;
+}
+
+.forecast-info::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+
+
+
+

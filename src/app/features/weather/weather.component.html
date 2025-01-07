@@ -1,89 +1,82 @@
 <nz-card nzTitle="Weather Information" nzBordered>
   <!-- Input tìm kiếm thành phố -->
   <div class="search-container">
-    <nz-input-group nzPrefixIcon="search">
-      <input
-        nz-input
-        placeholder="Enter city name"
-        [(ngModel)]="city"
-      />
-    </nz-input-group>
-    <button nz-button nzType="primary" (click)="fetchWeatherAndForecast()" [disabled]="!city">
-      Search
-    </button>
+    <div class="search-box">
+      <nz-input-group nzPrefixIcon="search">
+        <input
+          nz-input
+          placeholder="Enter city name"
+          [(ngModel)]="city"
+        />
+      </nz-input-group>
+      <button
+        nz-button
+        nzType="primary"
+        (click)="fetchWeatherAndForecast()"
+        [disabled]="!city"
+        class="search-button"
+      >
+        Search
+      </button>
+    </div>
   </div>
 
-  <!-- Hiển thị thời tiết hiện tại -->
-  <ng-container *ngIf="weatherData; else loading">
-    <div class="weather-info">
-      <nz-descriptions nzTitle="Current Weather" nzBordered>
-        <nz-descriptions-item nzTitle="Temperature (°C)">
-          {{ weatherData.main.temp | number: '1.1-1' }}
-        </nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Humidity (%)">
-          {{ weatherData.main.humidity }}
-        </nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Condition">
-          {{ weatherData.weather[0].main }}
-        </nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Description">
-          {{ weatherData.weather[0].description }}
-        </nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Wind Speed (m/s)">
-          {{ weatherData.wind.speed }}
-        </nz-descriptions-item>
-      </nz-descriptions>
-    </div>
 
-    <!-- Hiển thị dự báo thời tiết -->
-<!--    <div class="forecast-info">-->
-<!--      <nz-list nzBordered nzHeader="Forecast for 5 Days">-->
-<!--        <nz-list-item *ngFor="let forecast of filteredForecast">-->
-<!--          <div>-->
-<!--            <strong>{{ forecast.dt * 1000 | date: 'EEEE, MMM d, y' }}</strong>-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            Temperature: {{ forecast.main.temp | number: '1.1-1' }} °C-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            Humidity: {{ forecast.main.humidity }} %-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            Condition: {{ forecast.weather[0].description }}-->
-<!--          </div>-->
-<!--        </nz-list-item>-->
-<!--      </nz-list>-->
+<!--  &lt;!&ndash; Hiển thị thời tiết hiện tại &ndash;&gt;-->
+  <ng-container *ngIf="weatherData; else loading">
+<!--    <div class="weather-info">-->
+<!--      <nz-descriptions nzTitle="Current Weather" nzBordered>-->
+<!--        <nz-descriptions-item nzTitle="Temperature (°C)">-->
+<!--          {{ weatherData.main.temp | number: '1.1-1' }}-->
+<!--        </nz-descriptions-item>-->
+<!--        <nz-descriptions-item nzTitle="Humidity (%)">-->
+<!--          {{ weatherData.main.humidity }}-->
+<!--        </nz-descriptions-item>-->
+<!--        <nz-descriptions-item nzTitle="Condition">-->
+<!--          {{ weatherData.weather[0].main }}-->
+<!--        </nz-descriptions-item>-->
+<!--        <nz-descriptions-item nzTitle="Description">-->
+<!--          {{ weatherData.weather[0].description }}-->
+<!--        </nz-descriptions-item>-->
+<!--        <nz-descriptions-item nzTitle="Wind Speed (m/s)">-->
+<!--          {{ weatherData.wind.speed }}-->
+<!--        </nz-descriptions-item>-->
+<!--      </nz-descriptions>-->
 <!--    </div>-->
+<!---->
+<!--  Hien thi thoi tiet 5 ngay-->
     <div class="forecast-info">
       <div class="forecast-cards">
         <nz-card
           *ngFor="let forecast of filteredForecast"
-          [nzBordered]="true"
+          [nzBordered]="false"
           [nzHoverable]="true"
           class="forecast-card"
         >
-          <div class="card-header">
-            <strong>{{ forecast.dt * 1000 | date: 'EEEE, MMM d, y' }}</strong>
-          </div>
-          <div class="card-body">
-            <!-- Sử dụng ngSrc để tải hình ảnh -->
-            <img
-              [ngSrc]="getWeatherIcon(forecast.weather[0].icon)"
-              alt="{{ forecast.weather[0].description }}"
-              width="80"
-              height="80"
-              class="weather-icon"
-            />
-            <div class="weather-details">
-              <p>Temperature: {{ forecast.main.temp | number: '1.1-1' }} °C</p>
-              <p>Humidity: {{ forecast.main.humidity }} %</p>
-              <p>Condition: {{ forecast.weather[0].description }}</p>
+          <div class="card-content">
+            <div class="card-header">
+              <span class="date">{{ forecast.dt * 1000 | date: 'EEE, MMM d' }}</span>
+            </div>
+            <div class="card-body">
+              <img
+                [ngSrc]="getWeatherIcon(forecast.weather[0].icon)"
+                alt="{{ forecast.weather[0].description }}"
+                width="50"
+                height="50"
+                class="weather-icon"
+              />
+              <div class="weather-details">
+                <p class="temp">{{ forecast.main.temp | number: '1.0-0' }}°C</p>
+                <p class="desc">{{ forecast.weather[0].description }}</p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span>Humidity: {{ forecast.main.humidity }}%</span>
             </div>
           </div>
         </nz-card>
       </div>
     </div>
-
 
   </ng-container>
 
