@@ -1,0 +1,53 @@
+<nz-card nzTitle="Dashboard" [nzBordered]="false" class="dashboard-card">
+  <div nz-row [nzGutter]="16">
+    <!-- Biểu đồ tổng chi phí theo mùa vụ -->
+    <div nz-col [nzSpan]="12">
+      <nz-card nzTitle="Total Costs by Seasons" [nzBordered]="true">
+        <canvas
+          baseChart
+          [type]="barChartType"
+          [data]="barChartData"
+          [options]="barChartOptions"
+          [legend]="true">
+        </canvas>
+      </nz-card>
+    </div>
+
+    <!-- Biểu đồ trạng thái task của tất cả mùa vụ -->
+    <div nz-col [nzSpan]="12">
+      <nz-card nzTitle="Task Status for All Seasons" [nzBordered]="true">
+        <canvas
+          baseChart
+          [type]="pieChartType"
+          [data]="pieChartData"
+          [options]="pieChartOptions"
+          [legend]="true">
+        </canvas>
+      </nz-card>
+    </div>
+  </div>
+
+  <div nz-row [nzGutter]="16" style="margin-top: 24px;">
+    <!-- Biểu đồ trạng thái task theo mùa vụ -->
+    <div nz-col [nzSpan]="24">
+      <nz-card nzTitle="Task Status by Season" [nzBordered]="true">
+        <nz-select
+          [(ngModel)]="selectedSeasonId"
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="Select a Season"
+          (ngModelChange)="onSeasonChange($event)">
+          <nz-option *ngFor="let season of seasons" [nzValue]="season.id" [nzLabel]="season.seasonName"></nz-option>
+        </nz-select>
+        <canvas
+          baseChart
+          *ngIf="seasonBarChartData.datasets[0].data.length > 0"
+          [type]="seasonBarChartType"
+          [data]="seasonBarChartData"
+          [options]="seasonBarChartOptions"
+          [legend]="true">
+        </canvas>
+      </nz-card>
+    </div>
+  </div>
+</nz-card>

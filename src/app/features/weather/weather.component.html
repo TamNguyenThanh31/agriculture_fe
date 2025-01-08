@@ -23,7 +23,7 @@
 
 
 <!--  &lt;!&ndash; Hiển thị thời tiết hiện tại &ndash;&gt;-->
-  <ng-container *ngIf="weatherData; else loading">
+<!--  <ng-container *ngIf="weatherData; else loading">-->
 <!--    <div class="weather-info">-->
 <!--      <nz-descriptions nzTitle="Current Weather" nzBordered>-->
 <!--        <nz-descriptions-item nzTitle="Temperature (°C)">-->
@@ -44,6 +44,7 @@
 <!--      </nz-descriptions>-->
 <!--    </div>-->
 <!---->
+  <ng-container *ngIf="weatherData; else loading">
 <!--  Hien thi thoi tiet 5 ngay-->
     <div class="forecast-info">
       <div class="forecast-cards">

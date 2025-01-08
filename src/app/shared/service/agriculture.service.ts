@@ -104,4 +104,19 @@ export class AgricultureService {
     return this.http.delete<void>(`${this.apiBaseUrl}/tasks/${id}`);
   }
 
+  // Lấy tổng chi phí theo từng mùa vụ
+  getTotalCostsBySeasons(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiBaseUrl}/seasons/total-costs`);
+  }
+
+  // Lấy trạng thái task của tất cả mùa vụ
+  getTaskStatusSummary(): Observable<{ [key: string]: number }> {
+    return this.http.get<{ [key: string]: number }>(`${this.apiBaseUrl}/tasks/status-summary`);
+  }
+
+  // Lấy trạng thái task theo từng mùa vụ
+  getTaskStatusSummaryForSeason(seasonId: number): Observable<{ [key: string]: number }> {
+    return this.http.get<{ [key: string]: number }>(`${this.apiBaseUrl}/tasks/${seasonId}/status-summary`);
+  }
+
 }

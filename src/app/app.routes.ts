@@ -18,5 +18,9 @@ export const routes: Routes = [
   {
     path: 'season/:seasonId/tasks',
     loadComponent: () => import('./features/season/CropTask/crop-task.component').then(c => c.CropTaskComponent)
+  },
+  {
+    path: 'dashboard',
+    loadComponent: () => import('./features/dashboard/dashboard.component').then(c => c.DashboardComponent)
   }
 ];
