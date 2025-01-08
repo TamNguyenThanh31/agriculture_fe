@@ -7,13 +7,21 @@
 
 .app-layout {
   height: 100vh;
+  display: flex;
 }
 
 .menu-sidebar {
-  position: relative;
-  z-index: 10;
-  min-height: 100vh;
-  box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  //height: 100%; /* Đảm bảo sidebar luôn chiếm toàn màn hình */
+  //overflow-y: auto; /* Thêm cuộn bên trong sidebar nếu cần */
+  //z-index: 10;
+  //min-height: 100vh;
+  //box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  flex: 0 0 256px; /* Sidebar cố định chiều rộng */
+  height: 100%; /* Chiều cao sidebar 100% */
+  background: #001529; /* Màu nền sidebar */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Ngăn sidebar bị cuộn */
 }
 
 .header-trigger {
@@ -73,8 +81,36 @@ nz-content {
   margin: 24px;
 }
 
-.inner-content {
-  padding: 24px;
-  background: #fff;
-  height: 100%;
+//.inner-content {
+//  padding: 24px;
+//  background: #fff;
+//  height: 100%;
+//}
+nz-layout {
+  flex: 1; /* Nội dung chính chiếm hết không gian còn lại */
+  display: flex;
+  flex-direction: column;
+
+  nz-header {
+    height: 64px; /* Chiều cao header */
+    background: #ffffff;
+    line-height: 64px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0 16px;
+  }
+
+  .content-scroll {
+    flex: 1; /* Chiều cao nội dung tự điều chỉnh */
+    overflow-y: auto; /* Cuộn nội dung chính */
+    padding: 1rem;
+    background: #f0f2f5; /* Nền nhạt cho nội dung */
+  }
+
+  .inner-content {
+    min-height: 100%; /* Ví dụ nội dung dài */
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
 }
