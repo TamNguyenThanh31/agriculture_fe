@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%; /* Hình ảnh tròn */
+  //object-fit: cover; /* Đảm bảo giữ tỷ lệ ảnh */
+  //border: 3px solid #4caf50; /* Viền xanh lá đậm */
+}

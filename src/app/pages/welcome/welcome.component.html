@@ -1,1 +1,29 @@
-<p>welcome works!</p>
+<div class="welcome-container">
+  <nz-card nzBordered="false" class="welcome-header-card">
+    <h1>Chào mừng đến với Hệ thống Quản lý Nông nghiệp</h1>
+    <p>Giải pháp thông minh giúp bạn tối ưu hóa nông nghiệp</p>
+  </nz-card>
+  <div class="features-grid">
+    <nz-card nzHoverable *ngFor="let feature of features" class="feature-card">
+      <nz-card-meta
+        [nzAvatar]="feature.icon"
+        [nzTitle]="feature.title"
+        [nzDescription]="feature.description"
+      ></nz-card-meta>
+    </nz-card>
+  </div>
+</div>
+
+<!-- Templates for icons -->
+<ng-template #farmingIcon>
+  <img src="assets/images/management.png" alt="Quản lý mùa vụ" />
+</ng-template>
+<ng-template #weatherIcon>
+  <img src="assets/images/weather.png" alt="Xem thời tiết" />
+</ng-template>
+<ng-template #statisticsIcon>
+  <img src="assets/images/dashboard.png" alt="Thống kê" />
+</ng-template>
+<ng-template #chatbotIcon>
+  <img src="assets/images/chatbot.png" alt="Chatbot" />
+</ng-template>
