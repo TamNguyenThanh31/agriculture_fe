@@ -1,11 +1,156 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
+import { AgricultureService, CropTask } from '../../../shared/service/agriculture.service';
+import { NzCardComponent } from 'ng-zorro-antd/card';
+import { NzButtonComponent } from 'ng-zorro-antd/button';
+import { NzTableComponent, NzThMeasureDirective } from 'ng-zorro-antd/table';
+import {CurrencyPipe, DatePipe, NgForOf} from '@angular/common';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
+import { NzIconDirective } from 'ng-zorro-antd/icon';
+import { CropTaskFormComponent } from './crop-task-form/crop-task-form.component';
+import { NzTagComponent } from 'ng-zorro-antd/tag';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-crop-task',
-  imports: [],
+  standalone: true,
+  imports: [
+    NzCardComponent,
+    NzButtonComponent,
+    NzTableComponent,
+    NzThMeasureDirective,
+    NgForOf,
+    DatePipe,
+    NzModalModule,
+    NzTooltipDirective,
+    NzIconDirective,
+    NzTagComponent,
+    CurrencyPipe
+  ],
   templateUrl: './crop-task.component.html',
-  styleUrl: './crop-task.component.scss'
+  styleUrls: ['./crop-task.component.scss']
 })
-export class CropTaskComponent {
+export class CropTaskComponent implements OnInit {
+  cropTasks: CropTask[] = [];
+  isLoading = false;
+  seasonId!: number;
+
+  constructor(
+    private agricultureService: AgricultureService,
+    private modal: NzModalService,
+    private message: NzMessageService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.seasonId = +this.route.snapshot.paramMap.get('seasonId')!;
+    this.loadCropTasks();
+  }
+
+  loadCropTasks(): void {
+    this.isLoading = true;
+    this.agricultureService.getTasksBySeason(this.seasonId).subscribe(
+      (data) => {
+        this.cropTasks = data;
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Error fetching crop tasks:', error);
+        this.message.error('Failed to load crop tasks.');
+        this.isLoading = false;
+      }
+    );
+  }
+
+  deleteTask(taskId: number): void {
+    this.modal.confirm({
+      nzTitle: 'Are you sure you want to delete this task?',
+      nzOnOk: () => {
+        this.agricultureService.deleteCropTask(taskId).subscribe(
+          () => {
+            this.cropTasks = this.cropTasks.filter((t) => t.id !== taskId);
+            this.message.success('Task deleted successfully.');
+          },
+          (error) => {
+            console.error('Error deleting task:', error);
+            this.message.error('Failed to delete task.');
+          }
+        );
+      },
+    });
+  }
+
+  createTask(): void {
+    const modal = this.modal.create({
+      nzTitle: 'Add New Task',
+      nzContent: CropTaskFormComponent,
+      nzFooter: null,
+    });
+
+    const instance = modal.getContentComponent();
+    if (instance) {
+      instance.isEditMode = false;
+
+      // Truyền seasonId vào instance trực tiếp
+      instance.task = { seasonId: this.seasonId } as Partial<CropTask>;
+
+      instance.onSave.subscribe((newTask: CropTask) => {
+        // Gọi hàm createCropTask với cả seasonId và task
+        this.agricultureService.createCropTask(this.seasonId, newTask).subscribe({
+          next: (createdTask) => {
+            this.cropTasks.push(createdTask);
+            this.message.success('New task created successfully.');
+            modal.close();
+          },
+          error: (error) => {
+            console.error('Error creating task:', error);
+            this.message.error('Failed to create task.');
+          },
+        });
+      });
+
+      instance.onCancel.subscribe(() => {
+        modal.close();
+      });
+    }
+  }
+
+
+
+  editTask(task: CropTask): void {
+    const modal = this.modal.create({
+      nzTitle: `Edit Task: ${task.taskName}`,
+      nzContent: CropTaskFormComponent,
+      nzFooter: null,
+    });
+
+    const instance = modal.getContentComponent();
+    if (instance) {
+      instance.isEditMode = true;
+
+      // Truyền task vào instance trực tiếp
+      instance.task = { ...task };
+
+      instance.onSave.subscribe((updatedTask: CropTask) => {
+        if (updatedTask.id) {
+          this.agricultureService.updateCropTask(updatedTask.id, updatedTask).subscribe((result) => {
+            const index = this.cropTasks.findIndex((t) => t.id === result.id);
+            if (index !== -1) {
+              this.cropTasks[index] = result;
+            }
+            this.message.success('Task updated successfully.');
+            modal.close();
+          });
+        } else {
+          this.message.error('Failed to update task. Missing ID.');
+        }
+      });
+
+      instance.onCancel.subscribe(() => {
+        modal.close();
+      });
+    }
+  }
 
 }

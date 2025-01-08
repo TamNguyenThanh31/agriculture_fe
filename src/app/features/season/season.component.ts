@@ -37,7 +37,8 @@ export class SeasonComponent implements OnInit {
   constructor(
     private agricultureService: AgricultureService,
     private modal: NzModalService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private router: Router, // Thêm Router vào đây
   ) {}
 
   ngOnInit(): void {
@@ -59,23 +60,23 @@ export class SeasonComponent implements OnInit {
     );
   }
 
-  // deleteSeason(seasonId: number): void {
-  //   this.modal.confirm({
-  //     nzTitle: 'Are you sure you want to delete this season?',
-  //     nzOnOk: () => {
-  //       this.agricultureService.deleteCropSeason(seasonId).subscribe(
-  //         () => {
-  //           this.cropSeasons = this.cropSeasons.filter((s) => s.id !== seasonId);
-  //           this.message.success('Season deleted successfully.');
-  //         },
-  //         (error) => {
-  //           console.error('Error deleting season:', error);
-  //           this.message.error('Failed to delete season.');
-  //         }
-  //       );
-  //     },
-  //   });
-  // }
+  deleteSeason(seasonId: number): void {
+    this.modal.confirm({
+      nzTitle: 'Are you sure you want to delete this season?',
+      nzOnOk: () => {
+        this.agricultureService.deleteCropSeason(seasonId).subscribe(
+          () => {
+            this.cropSeasons = this.cropSeasons.filter((s) => s.id !== seasonId);
+            this.message.success('Season deleted successfully.');
+          },
+          (error) => {
+            console.error('Error deleting season:', error);
+            this.message.error('Failed to delete season.');
+          }
+        );
+      },
+    });
+  }
 
   createSeason(): void {
     const modal = this.modal.create({
@@ -141,15 +142,14 @@ export class SeasonComponent implements OnInit {
     // Chuyển hướng đến màn hình danh sách công việc
   }
 
-  deleteSeason(id: number): void {
-    this.agricultureService.deleteCropSeason(id).subscribe(() => {
-      this.cropSeasons = this.cropSeasons.filter((season) => season.id !== id);
-      this.message.success('Season deleted successfully.');
-    });
-  }
+  // deleteSeason(id: number): void {
+  //   this.agricultureService.deleteCropSeason(id).subscribe(() => {
+  //     this.cropSeasons = this.cropSeasons.filter((season) => season.id !== id);
+  //     this.message.success('Season deleted successfully.');
+  //   });
+  // }
 
   manageTasks(seasonId: number): void {
-    console.log(`Managing tasks for season ID: ${seasonId}`);
-    // Chuyển hướng hoặc hiển thị modal quản lý công việc
+    this.router.navigate([`/season/${seasonId}/tasks`]);
   }
 }

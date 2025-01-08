@@ -91,9 +91,10 @@ export class AgricultureService {
     return this.http.get<CropTask>(`${this.apiBaseUrl}/tasks/${id}`);
   }
 
-  createCropTask(task: Partial<CropTask>): Observable<CropTask> {
-    return this.http.post<CropTask>(`${this.apiBaseUrl}/tasks`, task);
+  createCropTask(seasonId: number, task: Partial<CropTask>): Observable<CropTask> {
+    return this.http.post<CropTask>(`${this.apiBaseUrl}/tasks/${seasonId}`, task);
   }
+
 
   updateCropTask(id: number, task: Partial<CropTask>): Observable<CropTask> {
     return this.http.put<CropTask>(`${this.apiBaseUrl}/tasks/${id}`, task);
