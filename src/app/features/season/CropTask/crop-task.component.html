@@ -62,8 +62,23 @@
 
 <!-- Nút thêm mới -->
 <ng-template #addTaskButtonTemplate>
-  <button nz-button nzType="primary" class="add-button" (click)="createTask()">
+  <button
+    nz-button
+    nzType="primary"
+    class="add-button"
+    (click)="createTask()"
+    style="background-color: #81c784; border: none;"
+  >
     <i nz-icon nzType="plus"></i> Add New Task
+  </button>
+  <button
+    nz-button
+    nzType="default"
+    (click)="backToSeason()"
+    style="margin-left: 6px; background-color: #a5d6a7; border: none;"
+  >
+    <nz-icon nzType="left"></nz-icon>
+    Backward
   </button>
 </ng-template>
 
