@@ -1,84 +1,100 @@
 .dashboard-card {
-  background-color: #f5f5f5; // Màu nền toàn bộ dashboard
+  background-color: #f7f9f3; // Màu nền dịu nhẹ
   padding: 24px;
   border-radius: 8px;
 
-  .nz-card {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); // Hiệu ứng đổ bóng
-    border-radius: 12px; // Bo góc mềm mại
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  nz-card {
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e6e6e6; // Viền nhẹ để phân cách
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Đổ bóng nhẹ nhàng
+    transition: box-shadow 0.3s ease;
 
     &:hover {
-      transform: translateY(-5px); // Hiệu ứng nổi lên
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .ant-card-head {
-      background-color: #ffffff;
-      font-size: 18px;
+    .ant-card-head-title {
+      font-size: 1.2rem;
       font-weight: 600;
-      color: #333;
-      border-bottom: 2px solid #e8e8e8;
-    }
-
-    .ant-card-body {
-      padding: 16px;
+      color: #2d6a4f; // Xanh lá cây đậm
     }
   }
 
-  nz-row {
-    display: flex;
-    flex-wrap: wrap;
+  [nz-row] {
+    margin-bottom: 24px;
 
-    nz-col {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .ant-card {
-        width: 100%;
-        height: 100%;
+    [nz-col] {
+      nz-card {
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
     }
   }
 
-  // Dropdown styling for Task Status by Season
+  // Dropdown thiết kế đơn giản
   nz-select {
-    width: 100%;
     margin-bottom: 16px;
 
     .ant-select-selector {
-      border-radius: 8px;
-      transition: box-shadow 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 4px;
+      border: 1px solid #d4e2d4; // Màu xanh lá nhạt
+      background-color: #f1f7ed; // Nền xanh dịu
+      transition: border-color 0.3s ease;
 
       &:hover {
-        box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+        border-color: #81b29a; // Xanh lá cây trung bình
       }
     }
-  }
 
-  // Biểu đồ tròn cho Task Status by Season
-  .season-chart-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    canvas {
-      max-width: 400px;
-      max-height: 400px;
-      animation: fadeIn 0.8s ease-in-out;
+    .ant-select-arrow {
+      color: #2d6a4f; // Mũi tên xanh lá cây đậm
     }
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
+  // Biểu đồ
+  canvas {
+    margin-top: 16px;
+    border-radius: 4px; // Bo góc nhẹ
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.01); // Phóng to nhẹ khi hover
     }
   }
+}
+
+// Tông màu biểu đồ nông nghiệp
+$green-light: #a8d5ba; // Xanh lá cây nhạt
+$green-dark: #2d6a4f; // Xanh lá đậm
+$sun-yellow: #f6c453; // Vàng nắng
+
+.bar-chart {
+  background-color: $green-light;
+}
+
+.pie-chart {
+  background-color: $sun-yellow;
+}
+
+.season-chart {
+  background-color: $green-light;
+}
+
+// Card hover tinh tế
+.ant-card {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Chỉnh các margin và khoảng cách giữa các phần
+.margin-top {
+  margin-top: 24px;
 }
