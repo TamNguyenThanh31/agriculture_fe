@@ -1,0 +1,130 @@
+// Biến màu sắc chủ đạo
+$primary-color: #81c784; // Xanh lá cây chủ đạo
+$secondary-color: #a5d6a7; // Xanh nhạt cho điểm nhấn
+$background-color: #f6fff1; // Màu nền tổng thể
+$border-color: #d4e6c3; // Màu viền nhẹ
+$text-color: #4b6043; // Màu chữ
+
+// Toàn bộ trang
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+  margin: 0;
+  padding: 0;
+}
+
+// Card hiển thị thông tin
+.modern-card {
+  background-color: $background-color;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+
+  .ant-card-head-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: $primary-color;
+    display: flex;
+    align-items: center;
+
+    // Icon trong tiêu đề
+    &::before {
+      content: '🌱';
+      margin-right: 8px;
+    }
+  }
+}
+
+// Bảng hiển thị dữ liệu
+.crop-task-table {
+  thead {
+    tr {
+      background-color: $secondary-color;
+      th {
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        padding: 12px;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      &:hover {
+        background-color: rgba(129, 199, 132, 0.2);
+        transition: background-color 0.3s ease;
+      }
+
+      td {
+        text-align: center;
+        padding: 10px;
+      }
+    }
+  }
+}
+
+// Các nút
+button {
+  &.add-button {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      transition: background-color 0.3s ease;
+    }
+
+    i {
+      margin-right: 6px;
+    }
+  }
+
+  &.back-button {
+    background-color: $secondary-color;
+    color: white;
+    border: none;
+
+    &:hover {
+      background-color: darken($secondary-color, 10%);
+      transition: background-color 0.3s ease;
+    }
+  }
+}
+
+// Tag trạng thái
+.nz-tag {
+  &.ant-tag-orange {
+    background-color: lighten(orange, 40%);
+    color: darken(orange, 20%);
+    font-weight: bold;
+  }
+  &.ant-tag-green {
+    background-color: lighten($primary-color, 20%);
+    color: darken($primary-color, 20%);
+    font-weight: bold;
+  }
+  &.ant-tag-red {
+    background-color: lighten(red, 40%);
+    color: darken(red, 20%);
+    font-weight: bold;
+  }
+}
+
+// Tooltip
+.ant-tooltip-inner {
+  background-color: $primary-color;
+  color: white;
+  font-weight: bold;
+}
+
+// Hiệu ứng tổng thể
+* {
+  transition: all 0.3s ease;
+}

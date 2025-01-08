@@ -1,23 +1,24 @@
 .dashboard-card {
-  background-color: #f7f9f3; // Màu nền dịu nhẹ
+  background-color: #f6fff1; // Màu nền xanh lá nhạt hơn
   padding: 24px;
-  border-radius: 8px;
+  border-radius: 12px;
 
   nz-card {
     background: #ffffff;
-    border-radius: 8px;
-    border: 1px solid #e6e6e6; // Viền nhẹ để phân cách
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Đổ bóng nhẹ nhàng
-    transition: box-shadow 0.3s ease;
+    border-radius: 12px;
+    border: 1px solid #d4e6c3; // Viền xanh lá nhạt hơn
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05); // Đổ bóng nhẹ
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 
     &:hover {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px); // Hiệu ứng nổi
     }
 
     .ant-card-head-title {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: 600;
-      color: #2d6a4f; // Xanh lá cây đậm
+      color: #4b6043; // Xanh lá cây đậm
     }
   }
 
@@ -26,7 +27,7 @@
 
     [nz-col] {
       nz-card {
-        min-height: 300px;
+        min-height: 320px; // Chiều cao tối thiểu tăng lên một chút
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -34,43 +35,45 @@
     }
   }
 
-  // Dropdown thiết kế đơn giản
+  // Dropdown thiết kế tinh tế hơn
   nz-select {
     margin-bottom: 16px;
+    margin-top: 8px;
 
     .ant-select-selector {
-      padding: 8px 12px;
-      border-radius: 4px;
-      border: 1px solid #d4e2d4; // Màu xanh lá nhạt
-      background-color: #f1f7ed; // Nền xanh dịu
+      padding: 10px 14px;
+      border-radius: 6px; // Bo góc mềm mại
+      border: 1px solid #c8e1cc; // Màu viền nhẹ hơn
+      background-color: #f0f8f4; // Nền xanh lá dịu
       transition: border-color 0.3s ease;
 
       &:hover {
-        border-color: #81b29a; // Xanh lá cây trung bình
+        border-color: #81c784; // Xanh lá cây đậm hơn khi hover
       }
     }
 
     .ant-select-arrow {
-      color: #2d6a4f; // Mũi tên xanh lá cây đậm
+      color: #4b6043; // Mũi tên xanh lá cây đậm
     }
   }
 
   // Biểu đồ
   canvas {
     margin-top: 16px;
-    border-radius: 4px; // Bo góc nhẹ
-    transition: transform 0.2s ease;
+    border-radius: 6px; // Bo góc nhẹ
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 
     &:hover {
-      transform: scale(1.01); // Phóng to nhẹ khi hover
+      transform: scale(1.02); // Phóng to nhẹ khi hover
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Tăng bóng mờ khi hover
     }
   }
 }
 
-// Tông màu biểu đồ nông nghiệp
-$green-light: #a8d5ba; // Xanh lá cây nhạt
-$green-dark: #2d6a4f; // Xanh lá đậm
-$sun-yellow: #f6c453; // Vàng nắng
+// Tông màu biểu đồ
+$green-light: #a5d6a7; // Xanh lá cây nhạt hơn
+$green-dark: #4b6043; // Xanh lá đậm hơn
+$sun-yellow: #f6c453; // Vàng nắng sáng hơn
 
 .bar-chart {
   background-color: $green-light;
@@ -87,14 +90,30 @@ $sun-yellow: #f6c453; // Vàng nắng
 // Card hover tinh tế
 .ant-card {
   border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 
   &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
   }
 }
 
-// Chỉnh các margin và khoảng cách giữa các phần
+// Margin và khoảng cách giữa các phần
 .margin-top {
   margin-top: 24px;
+}
+
+// Chỉnh các hiệu ứng và padding tổng thể
+.dashboard-card {
+  padding: 24px;
+
+  nz-card {
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+
+    &:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px);
+    }
+  }
 }

@@ -22,29 +22,6 @@
     </div>
   </div>
 
-
-<!--  &lt;!&ndash; Hiển thị thời tiết hiện tại &ndash;&gt;-->
-<!--  <ng-container *ngIf="weatherData; else loading">-->
-<!--    <div class="weather-info">-->
-<!--      <nz-descriptions nzTitle="Current Weather" nzBordered>-->
-<!--        <nz-descriptions-item nzTitle="Temperature (°C)">-->
-<!--          {{ weatherData.main.temp | number: '1.1-1' }}-->
-<!--        </nz-descriptions-item>-->
-<!--        <nz-descriptions-item nzTitle="Humidity (%)">-->
-<!--          {{ weatherData.main.humidity }}-->
-<!--        </nz-descriptions-item>-->
-<!--        <nz-descriptions-item nzTitle="Condition">-->
-<!--          {{ weatherData.weather[0].main }}-->
-<!--        </nz-descriptions-item>-->
-<!--        <nz-descriptions-item nzTitle="Description">-->
-<!--          {{ weatherData.weather[0].description }}-->
-<!--        </nz-descriptions-item>-->
-<!--        <nz-descriptions-item nzTitle="Wind Speed (m/s)">-->
-<!--          {{ weatherData.wind.speed }}-->
-<!--        </nz-descriptions-item>-->
-<!--      </nz-descriptions>-->
-<!--    </div>-->
-<!---->
   <ng-container *ngIf="weatherData; else loading">
 <!--  Hien thi thoi tiet 5 ngay-->
     <div class="forecast-info">

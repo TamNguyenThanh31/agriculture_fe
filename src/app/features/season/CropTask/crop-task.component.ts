@@ -10,7 +10,7 @@ import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
 import { CropTaskFormComponent } from './crop-task-form/crop-task-form.component';
 import { NzTagComponent } from 'ng-zorro-antd/tag';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-crop-task',
@@ -40,7 +40,8 @@ export class CropTaskComponent implements OnInit {
     private agricultureService: AgricultureService,
     private modal: NzModalService,
     private message: NzMessageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -153,4 +154,7 @@ export class CropTaskComponent implements OnInit {
     }
   }
 
+  backToSeason():void{
+    this.router.navigate([`/season`]);
+  }
 }
