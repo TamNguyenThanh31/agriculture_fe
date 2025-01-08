@@ -1,51 +1,51 @@
 <nz-layout class="app-layout">
   <nz-sider class="menu-sidebar"
-    nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null"
+            nzCollapsible
+            nzWidth="256px"
+            nzBreakpoint="md"
+            [(nzCollapsed)]="isCollapsed"
+            [nzTrigger]="null"
   >
     <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+      <a href="" target="_blank">
+        <img src="assets/images/icon_agriculture.png" alt="logo">
         <h1>Agriculture Management</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/season">Season</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/dashboard">Dashboard</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/weather">weather</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/chatbot">chatbot</a>
-          </li>
-        </ul>
+      <li nz-menu-item nzMatchRouter>
+        <i nz-icon nzType="menu"></i>
+        <span>Welcome</span>
+        <a routerLink="/welcome"></a>
       </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
-          </li>
-        </ul>
+      <li nz-menu-item nzMatchRouter>
+        <i nz-icon nzType="appstore"></i>
+        <span>Season</span>
+        <a routerLink="/season"></a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <i nz-icon nzType="area-chart"></i>
+        <span>Dashboard</span>
+        <a routerLink="/dashboard"></a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <i nz-icon nzType="sun"></i>
+        <span>Weather</span>
+        <a routerLink="/weather"></a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <i nz-icon nzType="open-a-i"></i>
+        <span>Chatbot</span>
+        <a routerLink="/chatbot"></a>
       </li>
     </ul>
+
   </nz-sider>
   <nz-layout>
     <nz-header>
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <nz-icon class="trigger" [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
+          <nz-icon class="trigger" [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"/>
         </span>
       </div>
     </nz-header>
