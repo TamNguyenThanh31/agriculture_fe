@@ -37,9 +37,9 @@ export class CropTaskFormComponent implements OnInit {
 
   taskForm!: FormGroup;
   statusOptions = [
-    { label: 'Pending', value: 'PENDING' },
-    { label: 'Completed', value: 'COMPLETED' },
-    { label: 'Cancelled', value: 'CANCELLED' }
+    { label: 'Hoàn thành', value: 'COMPLETED' },
+    { label: 'Chưa hoàn thành', value: 'PENDING' },
+    { label: 'Trễ hạn', value: 'MISSED' }
   ];
 
   constructor(private fb: FormBuilder) {}
