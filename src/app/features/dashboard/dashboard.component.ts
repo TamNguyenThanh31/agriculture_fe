@@ -8,6 +8,7 @@ import {NgForOf, NgIf} from '@angular/common';
 import {AgricultureService} from '../../shared/service/agriculture.service';
 import { ChartData } from 'chart.js';
 import { Chart, registerables } from 'chart.js';
+import {DashboardWeatherComponent} from '../dashboard-weather/dashboard-weather.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +21,8 @@ import { Chart, registerables } from 'chart.js';
     FormsModule,
     NzOptionComponent,
     NgForOf,
-    NgIf
+    NgIf,
+    DashboardWeatherComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'

@@ -8,3 +8,7 @@ img {
   //object-fit: cover; /* Đảm bảo giữ tỷ lệ ảnh */
   //border: 3px solid #4caf50; /* Viền xanh lá đậm */
 }
+
+button > i :hover{
+  transform: scale(1.1);
+}

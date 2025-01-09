@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {DatePipe, DecimalPipe, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {NzSpinComponent} from 'ng-zorro-antd/spin';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
+import {DashboardWeatherComponent} from '../dashboard-weather/dashboard-weather.component';
 
 @Component({
   selector: 'app-weather',
@@ -22,7 +23,8 @@ import {NzButtonComponent} from 'ng-zorro-antd/button';
     NzButtonComponent,
     DatePipe,
     NgForOf,
-    NgOptimizedImage
+    NgOptimizedImage,
+    DashboardWeatherComponent
   ]
 })
 export class WeatherComponent implements OnInit {
@@ -32,6 +34,7 @@ export class WeatherComponent implements OnInit {
   forecastData: any[] = [];
   filteredForecast: any[] = []; // Dữ liệu đã lọc, mỗi ngày chỉ 1 bản ghi
   isLoading: boolean = false;
+  showWeatherChart = false; // Trạng thái hiển thị biểu đồ
 
   constructor(private agricultureService: AgricultureService) {}
 
@@ -104,5 +107,21 @@ export class WeatherComponent implements OnInit {
 
   getWeatherIcon(iconCode: string): string {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+  }
+  // toggleWeatherChart(): void {
+  //   this.showWeatherChart = !this.showWeatherChart; // Chuyển đổi trạng thái hiển thị
+  // }
+  toggleWeatherChart(): void {
+    const wrapper = document.querySelector('.card-wrapper');
+    if (this.showWeatherChart) {
+      // Thêm lớp 'hidden' trước khi ẩn
+      if (wrapper) wrapper.classList.add('hidden');
+      setTimeout(() => (this.showWeatherChart = false), 500); // Chờ animation xong rồi ẩn
+    } else {
+      this.showWeatherChart = true;
+      setTimeout(() => {
+        if (wrapper) wrapper.classList.remove('hidden');
+      });
+    }
   }
 }
