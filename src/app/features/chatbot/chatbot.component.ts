@@ -25,23 +25,24 @@ export class ChatbotComponent {
     // Thêm tin nhắn người dùng vào lịch sử
     this.chatHistory.push({ role: 'User', content: this.userMessage });
 
-    // Gọi API backend
+    // Gửi tin nhắn đến backend
     this.agricultureService.sendMessageToChatbot(this.userMessage).subscribe(
       (response) => {
-        // Thêm phản hồi từ chatbot vào lịch sử
-        this.chatHistory.push({ role: 'AI', content: response });
+        // Xử lý phản hồi từ backend
+        console.log('Phản hồi từ backend:', response);
+
+        // Lấy nội dung từ trường "response" và thêm vào lịch sử chat
+        this.chatHistory.push({ role: 'AI', content: response.response });
       },
       (error) => {
-        // Xử lý lỗi nếu cần
+        // Xử lý lỗi
+        this.chatHistory.push({ role: 'AI', content: 'Có lỗi xảy ra. Vui lòng thử lại.' });
         console.error('Error:', error);
-        this.chatHistory.push({
-          role: 'AI',
-          content: 'Có lỗi xảy ra, vui lòng thử lại sau.',
-        });
       }
     );
 
-    // Xóa tin nhắn người dùng sau khi gửi
+    // Xóa ô nhập tin nhắn
     this.userMessage = '';
   }
+
 }
