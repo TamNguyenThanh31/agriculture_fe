@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {map, Observable} from 'rxjs';
 
 // Interface cho dữ liệu thời tiết
 export interface WeatherResponse {
@@ -119,4 +119,11 @@ export class AgricultureService {
     return this.http.get<{ [key: string]: number }>(`${this.apiBaseUrl}/tasks/${seasonId}/status-summary`);
   }
 
+  //Lay api chatbot
+  sendMessageToChatbot(message: string): Observable<string> {
+    return this.http.post<{ response: string }>(`${this.apiBaseUrl}/chat`, { message }).pipe(
+      // Chỉ lấy giá trị "response" từ phản hồi
+      map((data) => data.response)
+    );
+  }
 }
