@@ -1,1 +1,17 @@
-<p>chatbot works!</p>
+<div class="chat-container">
+  <div class="chat-messages">
+    <div *ngFor="let chat of chatHistory" class="chat-message">
+      <p><strong>{{ chat.role }}:</strong> {{ chat.content }}</p>
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input
+      [(ngModel)]="userMessage"
+      (keyup.enter)="sendMessage()"
+      placeholder="Nhập tin nhắn..."
+    />
+    <button (click)="sendMessage()">Gửi</button>
+  </div>
+</div>
+
