@@ -120,10 +120,10 @@ export class AgricultureService {
   }
 
   //Lay api chatbot
-  sendMessageToChatbot(message: string): Observable<string> {
-    return this.http.post<{ response: string }>(`${this.apiBaseUrl}/chat`, { message }).pipe(
-      // Chỉ lấy giá trị "response" từ phản hồi
-      map((data) => data.response)
-    );
+  sendMessageToChatbot(message: string): Observable<any> {
+    return this.http.post<any>(`${this.apiBaseUrl}/chat`, { message });
   }
+
+
+
 }
