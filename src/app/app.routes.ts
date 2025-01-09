@@ -22,5 +22,9 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     loadComponent: () => import('./features/dashboard/dashboard.component').then(c => c.DashboardComponent)
+  },
+  {
+    path: 'dashboard-weather1',
+    loadComponent: () => import('./features/dashboard-weather/dashboard-weather.component').then(c => c.DashboardWeatherComponent)
   }
 ];

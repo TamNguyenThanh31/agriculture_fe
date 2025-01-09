@@ -1,0 +1,66 @@
+/* Tổng quan giao diện */
+div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Hiệu ứng cho wrapper chứa các thẻ */
+.card-wrapper {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
+  /* Khi bị ẩn */
+  &.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* Thiết kế cho thẻ */
+nz-card {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  border: 1px solid #a5d6a7;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
+
+  /* Hiệu ứng hover */
+  &:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Tiêu đề */
+  .ant-card-head-title {
+    color: #388e3c;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+/* Khoảng cách giữa các thẻ */
+.mt-4 {
+  margin-top: 20px;
+}
+
+/* Hiệu ứng xuất hiện */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
