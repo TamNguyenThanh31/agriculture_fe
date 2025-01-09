@@ -90,6 +90,9 @@ button {
     background-color: $secondary-color;
     color: white;
     border: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 4px;
 
     &:hover {
       background-color: darken($secondary-color, 10%);
