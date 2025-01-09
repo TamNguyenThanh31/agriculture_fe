@@ -11,11 +11,6 @@
 }
 
 .menu-sidebar {
-  //height: 100%; /* Đảm bảo sidebar luôn chiếm toàn màn hình */
-  //overflow-y: auto; /* Thêm cuộn bên trong sidebar nếu cần */
-  //z-index: 10;
-  //min-height: 100vh;
-  //box-shadow: 2px 0 6px rgba(0,21,41,.35);
   flex: 0 0 256px; /* Sidebar cố định chiều rộng */
   height: 100%; /* Chiều cao sidebar 100% */
   background: #001529; /* Màu nền sidebar */
