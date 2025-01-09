@@ -1,7 +1,18 @@
 <div class="chat-container">
-  <div class="chat-messages">
-    <div *ngFor="let chat of chatHistory" class="chat-message">
-      <p><strong>{{ chat.role }}:</strong> {{ chat.content }}</p>
+  <div class="chat-header">
+    <div class="header-content">
+      <img src="assets/images/chatbotLogo.png" alt="Logo" class="header-logo" />
+      <div class="header-text">
+        <h1>Trợ lý Nông Nghiệp</h1>
+        <p>Hỗ trợ chăm sóc cây trồng và canh tác thông minh</p>
+      </div>
+    </div>
+  </div>
+  <div class="chat-messages" #chatMessages>
+    <div *ngFor="let chat of chatHistory" class="chat-message" [ngClass]="chat.role">
+      <div class="message-bubble">
+        <p>{{ chat.content }}</p>
+      </div>
     </div>
   </div>
 
@@ -14,4 +25,6 @@
     <button (click)="sendMessage()">Gửi</button>
   </div>
 </div>
+
+
 
