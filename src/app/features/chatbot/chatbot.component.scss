@@ -217,3 +217,10 @@
     transform: translateX(0);
   }
 }
+
+.chat-message p {
+  margin: 0;
+  white-space: pre-wrap; /* Hỗ trợ xuống dòng với \n */
+  word-wrap: break-word; /* Xuống dòng nếu quá dài */
+}
+

@@ -20,3 +20,16 @@ button > i :hover{
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.telegram-icon {
+  width: 14px; /* Chiều rộng của icon */
+  height: 14px; /* Chiều cao của icon */
+  filter: invert(1); /* Đổi toàn bộ màu sang trắng (chỉ áp dụng cho ảnh đơn sắc) */
+  transition: transform 0.2s; /* Hiệu ứng khi hover */
+  margin-right: 1px;
+}
+
+.telegram-icon:hover {
+  transform: scale(1.2); /* Phóng to khi di chuột */
+}
+
