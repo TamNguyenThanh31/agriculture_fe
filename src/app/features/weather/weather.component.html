@@ -1,0 +1,82 @@
+<nz-card nzTitle="Thông tin thời tiết" nzBordered>
+  <!-- Input tìm kiếm thành phố -->
+  <div class="search-container">
+    <div class="search-box">
+      <nz-input-group nzPrefixIcon="search">
+        <input
+          nz-input
+          placeholder="Nhập tên thành phố"
+          [(ngModel)]="city"
+        />
+      </nz-input-group>
+      <button
+        nz-button
+        nzType="primary"
+        (click)="fetchWeatherAndForecast()"
+        [disabled]="!city"
+        class="search-button"
+        style="display: flex; justify-content: center; align-items: center;"
+      >
+        Tìm kiếm
+      </button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="weatherData; else loading">
+    <!--  Hien thi thoi tiet 5 ngay-->
+    <div class="forecast-info">
+      <div class="forecast-cards">
+        <nz-card
+          *ngFor="let forecast of filteredForecast"
+          [nzBordered]="false"
+          [nzHoverable]="true"
+          class="forecast-card"
+        >
+          <div class="card-content">
+            <div class="card-header">
+              <span class="date">{{ forecast.dt * 1000 | date: 'EEE, MMM d' }}</span>
+            </div>
+            <div class="card-body">
+              <img
+                [ngSrc]="getWeatherIcon(forecast.weather[0].icon)"
+                alt="{{ forecast.weather[0].description }}"
+                width="50"
+                height="50"
+                class="weather-icon"
+              />
+              <div class="weather-details">
+                <p class="temp">{{ forecast.main.temp | number: '1.0-0' }}°C</p>
+                <p class="desc">{{ forecast.weather[0].description }}</p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span>Humidity: {{ forecast.main.humidity }}%</span>
+            </div>
+          </div>
+        </nz-card>
+      </div>
+    </div>
+    <button
+      class="agriculture-button"
+      (click)="toggleWeatherChart()"
+    >
+      <span *ngIf="!showWeatherChart">Show Weather Charts</span>
+      <span *ngIf="showWeatherChart">Hide Weather Charts</span>
+    </button>
+
+    <div *ngIf="showWeatherChart">
+      <app-dashboard-weather [weatherData]="filteredForecast"></app-dashboard-weather>
+    </div>
+
+  </ng-container>
+
+  <!-- Loading state -->
+  <ng-template #loading>
+    <div class="loading-container">
+      <nz-spin nzSize="large"></nz-spin>
+      <p>Đang tải dữ liệu...</p>
+    </div>
+  </ng-template>
+</nz-card>
+
+

@@ -1,0 +1,54 @@
+<form nz-form [formGroup]="cropForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="seasonName">Tên mùa vụ</nz-form-label>
+    <nz-form-control nzErrorTip="Tên mùa vụ không được để trống">
+      <input nz-input id="seasonName" formControlName="seasonName" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="cropType">Loại cây trồng</nz-form-label>
+    <nz-form-control nzErrorTip="Loại cây trồng không được để trống">
+      <input nz-input id="cropType" formControlName="cropType" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="area">Diện tích (ha)</nz-form-label>
+    <nz-form-control nzErrorTip="Diện tích không được để trống">
+      <input nz-input id="area" formControlName="area" type="number" placeholder="0.0" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="plantingDate">Ngày gieo trồng</nz-form-label>
+    <nz-form-control nzErrorTip="Ngày gieo trồng không được để trống">
+      <input nz-input id="plantingDate" formControlName="plantingDate" type="date" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="expectedHarvestDate">Ngày thu hoạch</nz-form-label>
+    <nz-form-control nzErrorTip="Ngày thu hoạch không được để trống">
+      <input nz-input id="expectedHarvestDate" formControlName="expectedHarvestDate" type="date" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="status">Trạng thái</nz-form-label>
+    <nz-form-control nzErrorTip="Trạng thái không được để trống">
+      <nz-select formControlName="status" id="status" placeholder="Select status">
+        <nz-option *ngFor="let s of statusOptions" [nzValue]="s.value" [nzLabel]="s.label"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="form-actions">
+    <button nz-button nzType="primary" [disabled]="cropForm.invalid">
+      {{ isEditMode ? 'Update' : 'Tạo mùa vụ' }}
+    </button>
+    <button nz-button nzType="default" (click)="cancel()" type="button">
+      Hủy
+    </button>
+  </div>
+</form>

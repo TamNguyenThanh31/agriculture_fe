@@ -1,0 +1,219 @@
+/* Toàn bộ container */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 100%;
+  height: 80vh;
+  margin: 20px auto;
+  background: linear-gradient(135deg, #f9f9f9, #e8f5e9);
+  border: 1px solid #d4e157;
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+  opacity: 0; /* Bắt đầu ở trạng thái trong suốt */
+  transform: translateY(50px); /* Bắt đầu ở vị trí thấp hơn */
+  animation: fadeSlideIn 0.8s ease-out forwards; /* Gọi hiệu ứng */
+}
+
+/* Header */
+.chat-header {
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  padding: 15px 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #388e3c;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.header-text h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.header-text p {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+
+.chat-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Individual messages */
+.chat-message {
+  display: flex;
+  opacity: 0;
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.chat-message.user .message-bubble {
+  background: #a5d6a7;
+  color: #2e7d32;
+  align-self: flex-end;
+  border-radius: 15px 15px 0 15px;
+}
+
+.chat-message.AI .message-bubble {
+  background: #fff59d;
+  color: #827717;
+  align-self: flex-start;
+  border-radius: 15px 15px 15px 0;
+}
+
+.message-bubble {
+  max-width: 70%;
+  padding: 12px 15px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Spinner container */
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  color: #4caf50;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.loading-spinner::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid #c8e6c9;
+  border-top: 2px solid #4caf50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+/* Input container */
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background: #81c784;
+  border-top: 2px solid #66bb6a;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  background: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.chat-input input:focus {
+  border-color: #4caf50;
+}
+
+.chat-input button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background: #66bb6a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.chat-input button:hover {
+  background: #4caf50;
+  transform: scale(1.05);
+}
+
+.chat-input button:active {
+  transform: scale(0.95);
+}
+
+/* Scrollbar styling */
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: #a5d6a7;
+  border-radius: 10px;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hiệu ứng xuất hiện */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

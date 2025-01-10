@@ -1,0 +1,58 @@
+<nz-layout class="app-layout">
+  <nz-sider
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+  >
+    <div class="sidebar-logo">
+      <a href="" target="_blank">
+        <img src="assets/images/icon_agriculture.png" alt="logo">
+        <h1>Quản Lý Mùa Vụ</h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-menu-item nzMatchRouter>
+        <i nz-icon nzType="menu"></i>
+        <span>Giới thiệu</span>
+        <a routerLink="/welcome"></a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <i nz-icon nzType="appstore"></i>
+        <span>Mùa vụ</span>
+        <a routerLink="/season"></a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <i nz-icon nzType="area-chart"></i>
+        <span>Bảng tổng hợp</span>
+        <a routerLink="/dashboard"></a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <i nz-icon nzType="sun"></i>
+        <span>Thời tiết</span>
+        <a routerLink="/weather"></a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <i nz-icon nzType="open-a-i"></i>
+        <span>Chatbot</span>
+        <a routerLink="/chatbot"></a>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+          <nz-icon class="trigger" [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></nz-icon>
+        </span>
+      </div>
+    </nz-header>
+    <nz-content class="content-scroll">
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

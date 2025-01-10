@@ -1,0 +1,19 @@
+<div class="card-wrapper">
+  <nz-card nzBordered="false" nzTitle="Dự báo nhiệt độ">
+    <canvas
+      baseChart
+      [data]="tempChartData"
+      [options]="tempChartOptions"
+      [type]="tempChartType"
+    ></canvas>
+  </nz-card>
+
+  <nz-card nzBordered="false" nzTitle="Dự báo độ ẩm" class="mt-4">
+    <canvas
+      baseChart
+      [data]="humidityChartData"
+      [options]="humidityChartOptions"
+      [type]="humidityChartType"
+    ></canvas>
+  </nz-card>
+</div>
