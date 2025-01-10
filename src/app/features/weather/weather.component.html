@@ -1,11 +1,11 @@
-<nz-card nzTitle="Weather Information" nzBordered>
+<nz-card nzTitle="Thông tin thời tiết" nzBordered>
   <!-- Input tìm kiếm thành phố -->
   <div class="search-container">
     <div class="search-box">
       <nz-input-group nzPrefixIcon="search">
         <input
           nz-input
-          placeholder="Enter city name"
+          placeholder="Nhập tên thành phố"
           [(ngModel)]="city"
         />
       </nz-input-group>
@@ -17,7 +17,7 @@
         class="search-button"
         style="display: flex; justify-content: center; align-items: center;"
       >
-        Search
+        Tìm kiếm
       </button>
     </div>
   </div>
@@ -74,8 +74,9 @@
   <ng-template #loading>
     <div class="loading-container">
       <nz-spin nzSize="large"></nz-spin>
-      <p>Loading weather data...</p>
+      <p>Đang tải dữ liệu...</p>
     </div>
   </ng-template>
 </nz-card>
+
 

@@ -81,8 +81,8 @@ export class WeatherComponent implements OnInit {
           this.isLoading = false;
         },
         (error) => {
-          console.error('Error fetching weather data:', error);
-          alert('Could not fetch weather data. Please try again.');
+          console.error('Có lỗi xảy ra khi tải dữ liệu thời tiết:', error);
+          alert('Không thể tải dữ liệu thời tiết. Vui lòng thử lại.');
           this.isLoading = false;
         }
       );

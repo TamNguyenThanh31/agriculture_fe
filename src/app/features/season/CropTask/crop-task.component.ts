@@ -57,8 +57,8 @@ export class CropTaskComponent implements OnInit {
         this.isLoading = false;
       },
       (error) => {
-        console.error('Error fetching crop tasks:', error);
-        this.message.error('Failed to load crop tasks.');
+        console.error('Lỗi khi tải dữ liệu công việc:', error);
+        this.message.error('Tải dữ liệu công việc thất bại.');
         this.isLoading = false;
       }
     );
@@ -66,16 +66,16 @@ export class CropTaskComponent implements OnInit {
 
   deleteTask(taskId: number): void {
     this.modal.confirm({
-      nzTitle: 'Are you sure you want to delete this task?',
+      nzTitle: 'Bạn có chắc chắn muốn xóa công việc này?',
       nzOnOk: () => {
         this.agricultureService.deleteCropTask(taskId).subscribe(
           () => {
             this.cropTasks = this.cropTasks.filter((t) => t.id !== taskId);
-            this.message.success('Task deleted successfully.');
+            this.message.success('Xóa công việc thành công.');
           },
           (error) => {
-            console.error('Error deleting task:', error);
-            this.message.error('Failed to delete task.');
+            console.error('Lỗi khi xóa công viêc:', error);
+            this.message.error('Xóa công việc thất bại.');
           }
         );
       },
@@ -84,7 +84,7 @@ export class CropTaskComponent implements OnInit {
 
   createTask(): void {
     const modal = this.modal.create({
-      nzTitle: 'Add New Task',
+      nzTitle: 'Thêm công việc mới',
       nzContent: CropTaskFormComponent,
       nzFooter: null,
     });
@@ -101,12 +101,12 @@ export class CropTaskComponent implements OnInit {
         this.agricultureService.createCropTask(this.seasonId, newTask).subscribe({
           next: (createdTask) => {
             this.cropTasks.push(createdTask);
-            this.message.success('New task created successfully.');
+            this.message.success('Thêm công việc mới thành công.');
             modal.close();
           },
           error: (error) => {
-            console.error('Error creating task:', error);
-            this.message.error('Failed to create task.');
+            console.error('Lỗi khi thêm công việc mới:', error);
+            this.message.error('Thêm công việc mới thất bại.');
           },
         });
       });
@@ -121,7 +121,7 @@ export class CropTaskComponent implements OnInit {
 
   editTask(task: CropTask): void {
     const modal = this.modal.create({
-      nzTitle: `Edit Task: ${task.taskName}`,
+      nzTitle: `Sửa công việc: ${task.taskName}`,
       nzContent: CropTaskFormComponent,
       nzFooter: null,
     });
@@ -140,11 +140,11 @@ export class CropTaskComponent implements OnInit {
             if (index !== -1) {
               this.cropTasks[index] = result;
             }
-            this.message.success('Task updated successfully.');
+            this.message.success('Sửa công việc thành công.');
             modal.close();
           });
         } else {
-          this.message.error('Failed to update task. Missing ID.');
+          this.message.error('Sửa công việc thất bại.');
         }
       });
 

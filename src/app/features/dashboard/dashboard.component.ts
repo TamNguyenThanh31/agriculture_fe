@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
     labels: [],
     datasets: [
       {
-        label: 'Total Cost',
+        label: 'Tổng chi phí',
         data: [],
         backgroundColor: '#42A5F5',
         borderColor: '#1E88E5',
@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
 
   // Biểu đồ trạng thái task của tất cả mùa vụ (hình tròn)
   pieChartData: ChartData<'pie'> = {
-    labels: ['PENDING', 'COMPLETED', 'MISSED'],
+    labels: ['Chưa hoàn thành', 'Hoàn thành', 'Trễ hạn'],
     datasets: [
       {
         data: [],
@@ -60,10 +60,10 @@ export class DashboardComponent implements OnInit {
   // Biểu đồ trạng thái task theo mùa vụ (hình cột)
   selectedSeasonId: number | null = null;
   seasonBarChartData: ChartData<'bar'> = {
-    labels: ['PENDING', 'COMPLETED', 'MISSED'],
+    labels: ['Đang thực hiện', 'Hoàn thành', 'Trễ hạn'],
     datasets: [
       {
-        label: 'Task Count',
+        label: 'Số lượng công việc',
         data: [],
         backgroundColor: ['#FFA726', '#66BB6A', '#EF5350'],
         borderColor: '#333',

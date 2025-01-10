@@ -1,5 +1,5 @@
 <nz-card
-  nzTitle="Crop Seasons Management"
+  nzTitle="Quản lý mùa vụ cây trồng"
   nzBordered
   [nzExtra]="addButtonTemplate"
   class="modern-card"
@@ -14,13 +14,13 @@
   >
     <thead>
     <tr>
-      <th nzWidth="25%">Season Name</th>
-      <th nzWidth="15%">Crop Type</th>
-      <th nzWidth="10%">Area (ha)</th>
-      <th nzWidth="20%">Planting Date</th>
-      <th nzWidth="20%">Harvest Date</th>
-      <th nzWidth="20%">Status</th>
-      <th nzWidth="10%">Actions</th>
+      <th nzWidth="25%">Tên mùa vụ</th>
+      <th nzWidth="15%">Loại cây trồng</th>
+      <th nzWidth="10%">Diện tích (ha)</th>
+      <th nzWidth="20%">Ngày gieo trồng</th>
+      <th nzWidth="20%">Ngày thu hoạch</th>
+      <th nzWidth="20%">Trạng thái</th>
+      <th nzWidth="10%">Hoạt động</th>
     </tr>
     </thead>
     <tbody>
@@ -41,7 +41,7 @@
           nz-button
           nzType="link"
           nzShape="circle"
-          nz-tooltip="Edit Season"
+          nz-tooltip="Sửa mùa vụ"
           (click)="editSeason(season)"
         >
           <i nz-icon nzType="edit"></i>
@@ -50,7 +50,7 @@
           nz-button
           nzType="link"
           nzShape="circle"
-          nz-tooltip="Delete Season"
+          nz-tooltip="Xóa mùa vụ"
           (click)="deleteSeason(season.id)"
         >
           <i nz-icon nzType="delete"></i>
@@ -59,7 +59,7 @@
           nz-button
           nzType="link"
           nzShape="circle"
-          nz-tooltip="Manage Tasks"
+          nz-tooltip="Quản lý công việc"
           (click)="manageTasks(season.id)"
         >
           <i nz-icon nzType="bars"></i>
@@ -73,6 +73,6 @@
 <!-- Nút thêm mới -->
 <ng-template #addButtonTemplate>
   <button nz-button nzType="primary" class="add-button" (click)="createSeason()">
-    <i nz-icon nzType="plus"></i> Add New Season
+    <i nz-icon nzType="plus"></i> Thêm mùa vụ mới
   </button>
 </ng-template>

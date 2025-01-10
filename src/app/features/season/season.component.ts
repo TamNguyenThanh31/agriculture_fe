@@ -53,8 +53,8 @@ export class SeasonComponent implements OnInit {
         this.isLoading = false;
       },
       (error) => {
-        console.error('Error fetching crop seasons:', error);
-        this.message.error('Failed to load crop seasons.');
+        console.error('Có lỗi xảy ra khi tải mùa vụ:', error);
+        this.message.error('Tải dữ liệu mùa vụ cây trồng thất bại.');
         this.isLoading = false;
       }
     );
@@ -62,16 +62,16 @@ export class SeasonComponent implements OnInit {
 
   deleteSeason(seasonId: number): void {
     this.modal.confirm({
-      nzTitle: 'Are you sure you want to delete this season?',
+      nzTitle: 'Bạn có chắc chắn muốn xóa mùa vụ?',
       nzOnOk: () => {
         this.agricultureService.deleteCropSeason(seasonId).subscribe(
           () => {
             this.cropSeasons = this.cropSeasons.filter((s) => s.id !== seasonId);
-            this.message.success('Season deleted successfully.');
+            this.message.success('Xóa mùa vụ thành công.');
           },
           (error) => {
-            console.error('Error deleting season:', error);
-            this.message.error('Failed to delete season.');
+            console.error('Có lỗi xảy ra khi xóa mùa vụ:', error);
+            this.message.error('Xóa mùa vụ thất bại.');
           }
         );
       },
@@ -80,7 +80,7 @@ export class SeasonComponent implements OnInit {
 
   createSeason(): void {
     const modal = this.modal.create({
-      nzTitle: 'Add New Season',
+      nzTitle: 'Thêm mùa vụ mới',
       nzContent: CropFormComponent,
       nzFooter: null,
     });
@@ -92,7 +92,7 @@ export class SeasonComponent implements OnInit {
       instance.onSave.subscribe((newSeason: CropSeason) => {
         this.agricultureService.createCropSeason(newSeason).subscribe((createdSeason) => {
           this.cropSeasons.push(createdSeason);
-          this.message.success('New season created successfully.');
+          this.message.success('Tạo mùa vụ mới thành công.');
           modal.close();
         });
       });
@@ -105,7 +105,7 @@ export class SeasonComponent implements OnInit {
 
   editSeason(season: CropSeason): void {
     const modal = this.modal.create({
-      nzTitle: `Edit Season: ${season.seasonName}`,
+      nzTitle: `Sửa mùa vụ: ${season.seasonName}`,
       nzContent: CropFormComponent,
       nzFooter: null,
     });
@@ -122,11 +122,11 @@ export class SeasonComponent implements OnInit {
             if (index !== -1) {
               this.cropSeasons[index] = result;
             }
-            this.message.success('Season updated successfully.');
+            this.message.success('Sửa mùa vụ thành công.');
             modal.close();
           });
         } else {
-          this.message.error('Failed to update season. Missing ID.');
+          this.message.error('Sửa mùa vụ thất bại. Missing ID.');
         }
       });
 
@@ -138,7 +138,7 @@ export class SeasonComponent implements OnInit {
 
 
   viewTasks(seasonId: number): void {
-    console.log(`Viewing tasks for season ID: ${seasonId}`);
+    console.log(`Xem các công việc theo mã mùa vụ: ${seasonId}`);
     // Chuyển hướng đến màn hình danh sách công việc
   }
 

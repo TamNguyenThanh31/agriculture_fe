@@ -19,7 +19,7 @@ export class DashboardWeatherComponent implements OnInit {
     labels: [],
     datasets: [
       {
-        label: 'Temperature (°C)',
+        label: 'Nhiệt độ (°C)',
         data: [],
         borderColor: '#FF5733',
         fill: false,
@@ -35,7 +35,7 @@ export class DashboardWeatherComponent implements OnInit {
     labels: [],
     datasets: [
       {
-        label: 'Humidity (%)',
+        label: 'Độ ẩm (%)',
         data: [],
         borderColor: '#33B5FF',
         fill: false,

@@ -1,5 +1,5 @@
 <nz-card
-  nzTitle="Crop Tasks Management"
+  nzTitle="Quản lý công việc mùa vụ"
   [nzExtra]="addTaskButtonTemplate"
   nzBordered
   class="modern-card"
@@ -14,12 +14,12 @@
   >
     <thead>
     <tr>
-      <th nzWidth="25%">Task Name</th>
-      <th nzWidth="15%">Due Date</th>
-      <th nzWidth="15%">Status</th>
-      <th nzWidth="35%">Notes</th>
-      <th nzWidth="10%">Cost</th>
-      <th nzWidth="10%">Actions</th>
+      <th nzWidth="25%">Tên công việc</th>
+      <th nzWidth="15%">Ngày hết hạn</th>
+      <th nzWidth="15%">Trạng thái</th>
+      <th nzWidth="35%">Ghi chú</th>
+      <th nzWidth="10%">Chi phí</th>
+      <th nzWidth="10%">Hoạt động</th>
     </tr>
     </thead>
     <tbody>
@@ -40,7 +40,7 @@
           nz-button
           nzType="link"
           nzShape="circle"
-          nz-tooltip="Edit Task"
+          nz-tooltip="Sửa công việc"
           (click)="editTask(task)"
         >
           <i nz-icon nzType="edit"></i>
@@ -49,7 +49,7 @@
           nz-button
           nzType="link"
           nzShape="circle"
-          nz-tooltip="Delete Task"
+          nz-tooltip="Xóa công việc"
           (click)="deleteTask(task.id)"
         >
           <i nz-icon nzType="delete"></i>
@@ -69,7 +69,7 @@
     (click)="createTask()"
     style="background-color: #81c784; border: none;"
   >
-    <i nz-icon nzType="plus"></i> Add New Task
+    <i nz-icon nzType="plus"></i> Thêm công việc mới
   </button>
   <button
     nz-button
@@ -79,7 +79,7 @@
     style="margin-left: 6px; background-color: #a5d6a7; border: none;"
   >
     <nz-icon nzType="left"></nz-icon>
-    Backward
+    Quay lại
   </button>
 </ng-template>
 
