@@ -24,7 +24,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/dashboard/dashboard.component').then(c => c.DashboardComponent)
   },
   {
-    path: 'dashboard-weather1',
+    path: 'dashboard-weather',
     loadComponent: () => import('./features/dashboard-weather/dashboard-weather.component').then(c => c.DashboardWeatherComponent)
+  },
+  {
+    path: 'superset-dashboard',
+    loadComponent: () => import('./features/superset-dashboard/superset-dashboard.component').then(c => c.SupersetDashboardComponent)
   }
 ];

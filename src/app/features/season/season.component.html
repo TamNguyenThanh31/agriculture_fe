@@ -1,5 +1,5 @@
 <nz-card
-  nzTitle="Crop Seasons Management"
+  nzTitle="Quản lý mùa vụ"
   nzBordered
   [nzExtra]="addButtonTemplate"
   class="modern-card"
@@ -14,13 +14,13 @@
   >
     <thead>
     <tr>
-      <th nzWidth="25%">Season Name</th>
-      <th nzWidth="15%">Crop Type</th>
-      <th nzWidth="10%">Area (ha)</th>
-      <th nzWidth="20%">Planting Date</th>
-      <th nzWidth="20%">Harvest Date</th>
-      <th nzWidth="20%">Status</th>
-      <th nzWidth="10%">Actions</th>
+      <th nzWidth="25%">Tên mùa vụ</th>
+      <th nzWidth="15%">Loại cây trồng</th>
+      <th nzWidth="10%">Diện tích(m2)</th>
+      <th nzWidth="20%">Ngày gieo trồng</th>
+      <th nzWidth="20%">Ngày thu hoạch dự kiến</th>
+      <th nzWidth="20%">Trạng thái</th>
+      <th nzWidth="10%">Hành động</th>
     </tr>
     </thead>
     <tbody>
@@ -32,8 +32,9 @@
       <td>{{ season.expectedHarvestDate | date: 'mediumDate' }}</td>
       <td>
         <nz-tag
-          [nzColor]="season.status === 'Active' ? 'green' : 'red'"
-        >{{ season.status }}</nz-tag
+          [nzColor]="season.status === 'GROWING' ? 'orange' : season.status === 'NEAR_HARVEST' ? 'green' : 'red'">
+          {{ season.status }}
+        </nz-tag
         >
       </td>
       <td class="action-buttons">
@@ -41,7 +42,7 @@
           nz-button
           nzType="link"
           nzShape="circle"
-          nz-tooltip="Edit Season"
+          nz-tooltip="Chỉnh sửa mùa vụ"
           (click)="editSeason(season)"
         >
           <i nz-icon nzType="edit"></i>
@@ -50,7 +51,7 @@
           nz-button
           nzType="link"
           nzShape="circle"
-          nz-tooltip="Delete Season"
+          nz-tooltip="Xoá mùa vụ"
           (click)="deleteSeason(season.id)"
         >
           <i nz-icon nzType="delete"></i>
@@ -59,7 +60,7 @@
           nz-button
           nzType="link"
           nzShape="circle"
-          nz-tooltip="Manage Tasks"
+          nz-tooltip="Quản lý nhiệm vụ"
           (click)="manageTasks(season.id)"
         >
           <i nz-icon nzType="bars"></i>
@@ -73,6 +74,6 @@
 <!-- Nút thêm mới -->
 <ng-template #addButtonTemplate>
   <button nz-button nzType="primary" class="add-button" (click)="createSeason()">
-    <i nz-icon nzType="plus"></i> Add New Season
+    <i nz-icon nzType="plus"></i> Thêm mùa vụ
   </button>
 </ng-template>
