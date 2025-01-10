@@ -80,7 +80,7 @@ export class SeasonComponent implements OnInit {
 
   createSeason(): void {
     const modal = this.modal.create({
-      nzTitle: 'Add New Season',
+      nzTitle: 'Thêm mới mùa vụ',
       nzContent: CropFormComponent,
       nzFooter: null,
     });
@@ -92,7 +92,7 @@ export class SeasonComponent implements OnInit {
       instance.onSave.subscribe((newSeason: CropSeason) => {
         this.agricultureService.createCropSeason(newSeason).subscribe((createdSeason) => {
           this.cropSeasons.push(createdSeason);
-          this.message.success('New season created successfully.');
+          this.message.success('Thêm mùa vụ thành công.');
           modal.close();
         });
       });
@@ -103,9 +103,42 @@ export class SeasonComponent implements OnInit {
     }
   }
 
+  // editSeason(season: CropSeason): void {
+  //   const modal = this.modal.create({
+  //     nzTitle: `Edit Season: ${season.seasonName}`,
+  //     nzContent: CropFormComponent,
+  //     nzFooter: null,
+  //   });
+  //
+  //   const instance = modal.getContentComponent();
+  //   if (instance) {
+  //     instance.isEditMode = true;
+  //     instance.season = { ...season }; // Truyền đầy đủ thông tin, bao gồm id
+  //
+  //     instance.onSave.subscribe((updatedSeason: CropSeason) => {
+  //       if (updatedSeason.id) {
+  //         this.agricultureService.updateCropSeason(updatedSeason.id, updatedSeason).subscribe((result) => {
+  //           const index = this.cropSeasons.findIndex((s) => s.id === result.id);
+  //           if (index !== -1) {
+  //             this.cropSeasons[index] = result;
+  //           }
+  //           this.message.success('Season updated successfully.');
+  //           modal.close();
+  //         });
+  //       } else {
+  //         this.message.error('Failed to update season. Missing ID.');
+  //       }
+  //     });
+  //
+  //     instance.onCancel.subscribe(() => {
+  //       modal.close();
+  //     });
+  //   }
+  // }
+
   editSeason(season: CropSeason): void {
     const modal = this.modal.create({
-      nzTitle: `Edit Season: ${season.seasonName}`,
+      nzTitle: `Chỉnh sửa mùa vụ: ${season.seasonName}`,
       nzContent: CropFormComponent,
       nzFooter: null,
     });
@@ -113,20 +146,23 @@ export class SeasonComponent implements OnInit {
     const instance = modal.getContentComponent();
     if (instance) {
       instance.isEditMode = true;
-      instance.season = { ...season }; // Truyền đầy đủ thông tin, bao gồm id
+
+      // Truyền season vào instance
+      instance.season = { ...season };
 
       instance.onSave.subscribe((updatedSeason: CropSeason) => {
         if (updatedSeason.id) {
           this.agricultureService.updateCropSeason(updatedSeason.id, updatedSeason).subscribe((result) => {
             const index = this.cropSeasons.findIndex((s) => s.id === result.id);
             if (index !== -1) {
-              this.cropSeasons[index] = result;
+              this.cropSeasons[index] = { ...result }; // Thay đổi tham chiếu
+              this.cropSeasons = [...this.cropSeasons]; // Tạo danh sách mới
             }
-            this.message.success('Season updated successfully.');
+            this.message.success('Sửa mùa vụ thành công.');
             modal.close();
           });
         } else {
-          this.message.error('Failed to update season. Missing ID.');
+          this.message.error('Lỗi khi sửa mùa vụ.');
         }
       });
 

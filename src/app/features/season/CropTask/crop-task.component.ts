@@ -4,7 +4,7 @@ import { AgricultureService, CropTask } from '../../../shared/service/agricultur
 import { NzCardComponent } from 'ng-zorro-antd/card';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { NzTableComponent, NzThMeasureDirective } from 'ng-zorro-antd/table';
-import {CurrencyPipe, DatePipe, NgForOf} from '@angular/common';
+import {CurrencyPipe, DatePipe, DecimalPipe, NgForOf} from '@angular/common';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
@@ -26,7 +26,8 @@ import {ActivatedRoute, Router} from '@angular/router';
     NzTooltipDirective,
     NzIconDirective,
     NzTagComponent,
-    CurrencyPipe
+    CurrencyPipe,
+    DecimalPipe
   ],
   templateUrl: './crop-task.component.html',
   styleUrls: ['./crop-task.component.scss']
@@ -84,7 +85,7 @@ export class CropTaskComponent implements OnInit {
 
   createTask(): void {
     const modal = this.modal.create({
-      nzTitle: 'Add New Task',
+      nzTitle: 'Thêm nhiệm vụ',
       nzContent: CropTaskFormComponent,
       nzFooter: null,
     });
@@ -101,12 +102,12 @@ export class CropTaskComponent implements OnInit {
         this.agricultureService.createCropTask(this.seasonId, newTask).subscribe({
           next: (createdTask) => {
             this.cropTasks.push(createdTask);
-            this.message.success('New task created successfully.');
+            this.message.success('Thêm nhiệm vụ thành công.');
             modal.close();
           },
           error: (error) => {
             console.error('Error creating task:', error);
-            this.message.error('Failed to create task.');
+            this.message.error('Có lỗi khi thêm nhiệm vụ.');
           },
         });
       });
@@ -121,7 +122,7 @@ export class CropTaskComponent implements OnInit {
 
   editTask(task: CropTask): void {
     const modal = this.modal.create({
-      nzTitle: `Edit Task: ${task.taskName}`,
+      nzTitle: `Sửa nhiệm vụ: ${task.taskName}`,
       nzContent: CropTaskFormComponent,
       nzFooter: null,
     });
@@ -140,11 +141,11 @@ export class CropTaskComponent implements OnInit {
             if (index !== -1) {
               this.cropTasks[index] = result;
             }
-            this.message.success('Task updated successfully.');
+            this.message.success('Cập nhật nhiệm vụ thành công.');
             modal.close();
           });
         } else {
-          this.message.error('Failed to update task. Missing ID.');
+          this.message.error('Có lỗi khi sửa nhiệm vụ.');
         }
       });
 

@@ -1,4 +1,4 @@
-<nz-card nzTitle="Weather Information" nzBordered>
+<nz-card nzTitle="Dự báo thời tiết" nzBordered>
   <!-- Input tìm kiếm thành phố -->
   <div class="search-container">
     <div class="search-box">
@@ -17,7 +17,7 @@
         class="search-button"
         style="display: flex; justify-content: center; align-items: center;"
       >
-        Search
+        Tìm kiếm
       </button>
     </div>
   </div>
@@ -60,8 +60,8 @@
       class="agriculture-button"
       (click)="toggleWeatherChart()"
     >
-      <span *ngIf="!showWeatherChart">Show Weather Charts</span>
-      <span *ngIf="showWeatherChart">Hide Weather Charts</span>
+      <span *ngIf="!showWeatherChart">Hiển thị biểu đồ</span>
+      <span *ngIf="showWeatherChart">Ẩn biểu đồ</span>
     </button>
 
     <div *ngIf="showWeatherChart">
