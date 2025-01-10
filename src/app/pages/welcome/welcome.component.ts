@@ -18,6 +18,8 @@ export class WelcomeComponent {
   @ViewChild('weatherIcon') weatherIcon!: TemplateRef<void>;
   @ViewChild('statisticsIcon') statisticsIcon!: TemplateRef<void>;
   @ViewChild('chatbotIcon') chatbotIcon!: TemplateRef<void>;
+  @ViewChild('superSetIcon') superSetIcon!: TemplateRef<void>;
+  @ViewChild('telebotIcon') telebotIcon!: TemplateRef<void>;
 
   features: Array<{ icon: TemplateRef<void>; title: string; description: string }> = [];
 
@@ -42,6 +44,16 @@ export class WelcomeComponent {
         icon: this.chatbotIcon,
         title: 'Chatbot',
         description: 'Trợ lý ảo hỗ trợ giải đáp thắc mắc 24/7.',
+      },
+      {
+        icon: this.superSetIcon,
+        title: 'Superset Apache',
+        description: 'Nền tảng BI mã nguồn mở mạnh mẽ cho phân tích và trực quan hóa dữ liệu.',
+      },
+      {
+        icon: this.telebotIcon,
+        title: 'Telegram Bot',
+        description: 'Công cụ tự động hóa giao tiếp và dịch vụ thông minh qua nền tảng Telegram.',
       },
     ];
   }
