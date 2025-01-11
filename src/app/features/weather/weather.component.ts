@@ -108,9 +108,7 @@ export class WeatherComponent implements OnInit {
   getWeatherIcon(iconCode: string): string {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
   }
-  // toggleWeatherChart(): void {
-  //   this.showWeatherChart = !this.showWeatherChart; // Chuyển đổi trạng thái hiển thị
-  // }
+
   toggleWeatherChart(): void {
     const wrapper = document.querySelector('.card-wrapper');
     if (this.showWeatherChart) {
