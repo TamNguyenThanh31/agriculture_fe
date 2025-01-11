@@ -190,3 +190,113 @@ nz-input-group input::placeholder {
   transform: scale(0.98);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+//
+/* Skeleton Loader Styles */
+.skeleton-container {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.skeleton-card {
+  width: 180px;
+  height: 200px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #e6f7e9, #c8e6c9);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.skeleton-header,
+.skeleton-body,
+.skeleton-footer {
+  background: #d4edda;
+  border-radius: 4px;
+}
+
+.skeleton-header {
+  width: 70%;
+  height: 20px;
+  margin: 16px auto;
+}
+
+.skeleton-body {
+  width: 80%;
+  height: 50px;
+  margin: 16px auto;
+}
+
+.skeleton-footer {
+  width: 50%;
+  height: 15px;
+  margin: 16px auto;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.skeleton-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+      90deg,
+      rgba(230, 247, 233, 0.5) 25%,
+      rgba(200, 230, 201, 0.8) 50%,
+      rgba(230, 247, 233, 0.5) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Forecast Card Styles */
+.forecast-card {
+  margin: 8px;
+}
+
+.card-content {
+  text-align: center;
+}
+
+.card-header .date {
+  font-weight: bold;
+  font-size: 14px;
+  color: #388e3c;
+}
+
+.weather-details {
+  margin-top: 8px;
+}
+
+.weather-icon {
+  margin: 8px auto;
+}
+
+/* Loading Container */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.loading-container p {
+  margin-top: 12px;
+  font-size: 16px;
+  color: #66bb6a;
+}
+
+

@@ -5,7 +5,7 @@
       <nz-input-group nzPrefixIcon="search">
         <input
           nz-input
-          placeholder="Enter city name"
+          placeholder="Nhập tên thành phố"
           [(ngModel)]="city"
         />
       </nz-input-group>
@@ -22,8 +22,18 @@
     </div>
   </div>
 
-  <ng-container *ngIf="weatherData; else loading">
-    <!--  Hien thi thoi tiet 5 ngay-->
+  <!-- Hiển thị Skeleton Loader khi đang tải -->
+  <div *ngIf="isLoading" class="skeleton-container">
+    <div class="skeleton-card" *ngFor="let i of [1, 2, 3, 4, 5]">
+      <div class="skeleton-header"></div>
+      <div class="skeleton-body"></div>
+      <div class="skeleton-footer"></div>
+    </div>
+  </div>
+
+  <!-- Hiển thị nội dung khi đã tải xong -->
+  <ng-container *ngIf="!isLoading && weatherData">
+    <!-- Hiển thời tiết 5 ngày -->
     <div class="forecast-info">
       <div class="forecast-cards">
         <nz-card
@@ -56,26 +66,16 @@
         </nz-card>
       </div>
     </div>
-    <button
-      class="agriculture-button"
-      (click)="toggleWeatherChart()"
-    >
+
+    <!-- Nút hiển thị/ẩn biểu đồ -->
+    <button class="agriculture-button" (click)="toggleWeatherChart()">
       <span *ngIf="!showWeatherChart">Hiển thị biểu đồ</span>
       <span *ngIf="showWeatherChart">Ẩn biểu đồ</span>
     </button>
 
+    <!-- Biểu đồ thời tiết -->
     <div *ngIf="showWeatherChart">
       <app-dashboard-weather [weatherData]="filteredForecast"></app-dashboard-weather>
     </div>
-
   </ng-container>
-
-  <!-- Loading state -->
-  <ng-template #loading>
-    <div class="loading-container">
-      <nz-spin nzSize="large"></nz-spin>
-      <p>Loading weather data...</p>
-    </div>
-  </ng-template>
 </nz-card>
-
